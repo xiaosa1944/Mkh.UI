@@ -1,0 +1,23 @@
+{
+  "id": 1,
+  "name": "@mkh/mod-blog",
+  "version": "0.0.2",
+  "description": "17MKH博客管理模块",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "element-plus": "^1.0.2-beta.34",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.1.5",
+    "@vue/compiler-sfc": "^3.0.5",
+    "eslint": "^7.22.0",
+    "eslint-plugin-vue": "^7.7.0",
+    "vite": "^2.0.5"
+  }
+}
