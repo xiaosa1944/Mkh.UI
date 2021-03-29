@@ -1,9 +1,6 @@
-import MkhUI from '../package/index'
-import Admin from './modules/admin/index'
-import Blog from './modules/blog/index'
+import '../package/index.js'
+import './modules/admin/src/mod.js'
+import './modules/blog/src/mod.js'
 
-//使用模块
-MkhUI.useModule(Admin)
-MkhUI.useModule(Blog)
-
-MkhUI.start()
+MkhUI.config.site.logo = '/images/logo.png'
+MkhUI.config.site.title = '17MKH业务模块化快速开发平台'

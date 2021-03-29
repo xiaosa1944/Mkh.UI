@@ -1,47 +1,60 @@
-import pkg from '../package.json'
+import './MkhUI'
 import { createApp } from 'vue'
-import router from './router'
 import Layout from './layout.vue'
-
-let MkhUI = {
-  /**版本号 */
-  version: pkg.version,
-  /**模块列表 */
-  modules: [],
-}
-
-/**
- * @description 安装模块
- */
-MkhUI.useModule = module => {
-  MkhUI.modules.push(module)
-}
+import mkhRouter from './router'
+import mkhStore, { store } from './store'
+//导入ElementPlus
+import ElementPlus from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
+import locale from 'element-plus/lib/locale/lang/zh-cn'
+import Components from './components'
+import './styles/app.scss'
+//导入皮肤
+import './skins/brief'
+import './skins/youthful'
 
 /**
  * @description 启动
  */
-MkhUI.start = () => {
-  console.log(MkhUI.modules)
+const start = async () => {
   const app = createApp(Layout)
 
-  //使用路由
-  app.use(router)
+  //模块按照Id排序
+  MkhUI.modules = MkhUI.modules.sort((a, b) => a.id - b.id)
+
+  //注册路由
+  app.use(mkhRouter, MkhUI.modules)
+
+  //注册状态
+  app.use(mkhStore, MkhUI.modules)
+
+  //注册ElementPlus
+  app.use(ElementPlus, { locale })
+
+  //注册全局组件
+  app.use(Components)
+
+  //注册皮肤
+  MkhUI.skins.forEach(skin => {
+    // 注册组件
+    app.component('mu-skin-' + skin.code.toLowerCase(), skin.component)
+
+    // 注册状态
+    if (skin.store) {
+      store.registerModule(['app', 'skin', skin.code], skin.store)
+    }
+  })
+
+  //加载账户信息
+  await store.dispatch('app/account/init')
 
   app.mount('#app')
 }
 
-/**
- * 从package.json中创建模块
- * @param {Object} pkg 模块包信息
- */
-const creatModule = pkg => {
-  return {
-    id: pkg.id,
-    code: pkg.name.replace('@mkh/mod-', ''),
-    description: pkg.description,
-  }
+window.onload = () => {
+  start()
 }
 
-export default MkhUI
-
-export { creatModule }
+//导出一些工具模块，方便引用
+import db from './utils/db'
+export { db }

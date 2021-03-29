@@ -1,0 +1,29 @@
+$breadcrumb-height: 50px;
+
+.mu-breadcrumb {
+  flex-shrink: 0;
+  position: relative;
+  padding-left: 80px;
+  height: $breadcrumb-height;
+  box-shadow: 0px 20px 20px rgb(126 142 177 / 12%);
+  background: #fafafa;
+  box-sizing: border-box;
+
+  &_menu {
+    position: absolute;
+    top: 12px;
+    left: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #606266;
+
+    &:hover {
+      color: #303133;
+    }
+  }
+
+  .el-breadcrumb {
+    height: $breadcrumb-height;
+    line-height: $breadcrumb-height;
+  }
+}

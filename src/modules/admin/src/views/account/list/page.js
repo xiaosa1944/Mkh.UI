@@ -11,4 +11,6 @@ export default {
   permissions: [],
   //绑定按钮
   buttons: [],
+  //路由组件
+  component: () => import('./index.vue'),
 }

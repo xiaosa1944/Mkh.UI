@@ -1,0 +1,16 @@
+.mu-skin-brief {
+  background: #f1f2f3;
+
+  .mu-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+  }
+
+  @import './variables';
+  @import './components/header.scss';
+  @import './components/breadcrumb.scss';
+  @import './components/main.scss';
+  @import './components/menu.scss';
+}
