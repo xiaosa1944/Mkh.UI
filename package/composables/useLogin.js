@@ -1,8 +1,8 @@
-import { getCurrentInstance, ref } from 'vue'
+import { getCurrentInstance, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
-export default function (model) {
+export default function () {
   const { $notify } = getCurrentInstance().proxy
   const store = useStore()
   const router = useRouter()
@@ -20,6 +20,31 @@ export default function (model) {
   if (accessToken) {
     router.push(redirect)
     return
+  }
+
+  const model = reactive({ username: '', password: '', verifyCode: { id: '', code: '' } })
+  const rules = {
+    username: [
+      {
+        required: true,
+        message: '请输入用户名',
+        trigger: 'blur',
+      },
+    ],
+    password: [
+      {
+        required: true,
+        message: '请输入密码',
+        trigger: 'blur',
+      },
+    ],
+    'verifyCode.code': [
+      {
+        required: true,
+        message: '请输入验证码',
+        trigger: 'blur',
+      },
+    ],
   }
 
   const { login } = MkhUI.config.actions
@@ -52,7 +77,18 @@ export default function (model) {
     })
   }
 
+  onMounted(() => {
+    //监听键盘enter事件
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Enter') {
+        tryLogin()
+      }
+    })
+  })
+
   return {
+    model,
+    rules,
     loading,
     formRef,
     tryLogin,

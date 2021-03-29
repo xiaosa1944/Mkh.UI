@@ -29,7 +29,6 @@ export default {
   overflow: hidden;
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: #fff;
 
   &-main {
     padding: 5px;

@@ -30,37 +30,12 @@
   </section>
 </template>
 <script>
-import { reactive } from 'vue'
 import useLogin from '../../composables/useLogin'
 export default {
   name: 'LoginM',
   setup() {
-    const model = reactive({ username: '', password: '', verifyCode: { id: '', code: '' } })
     const { title, logo } = MkhUI.config.site
-    const rules = {
-      username: [
-        {
-          required: true,
-          message: '请输入用户名',
-          trigger: 'blur',
-        },
-      ],
-      password: [
-        {
-          required: true,
-          message: '请输入密码',
-          trigger: 'blur',
-        },
-      ],
-      'verifyCode.code': [
-        {
-          required: true,
-          message: '请输入验证码',
-          trigger: 'blur',
-        },
-      ],
-    }
-    const { loading, formRef, tryLogin } = useLogin(model)
+    const { model, rules, loading, formRef, tryLogin } = useLogin()
 
     return {
       title,
