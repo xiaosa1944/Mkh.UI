@@ -8,6 +8,8 @@ mod.api = api
 
 MkhUI.useModule(mod)
 
+MkhUI.config.component.login = 'h'
+
 //设置登录方法
 MkhUI.config.actions.login = api.login
 //设置获取验证码方法

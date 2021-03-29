@@ -45,6 +45,8 @@ const start = async () => {
     }
   })
 
+  //从本地存储中加载令牌
+  store.commit('app/token/loadFromlocalStorage')
   //加载账户信息
   await store.dispatch('app/account/init')
 
@@ -57,4 +59,5 @@ window.onload = () => {
 
 //导出一些工具模块，方便引用
 import db from './utils/db'
-export { db }
+import useLoading from './composables/useLoading'
+export { db, useLoading }

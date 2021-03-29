@@ -3,7 +3,7 @@
  */
 const login = ({ username, password }) => {
   return new Promise((resolve, reject) => {
-    if (username != 'admin' && password != '17mkh') {
+    if (username === 'admin' && password === '17mkh') {
       resolve({
         accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
         refreshToken: '',
@@ -62,7 +62,7 @@ const getAccountInfo = () => {
           id: '2',
           name: '权限管理',
           type: 0,
-          icon: 'safetycertificate',
+          icon: 'key',
           level: 1,
           show: true,
           children: [
@@ -74,6 +74,19 @@ const getAccountInfo = () => {
               level: 1,
               show: true,
               routeName: 'admin_account',
+              routeQuery: '{"id":1}',
+              routeParams: '{"type":"test"}',
+            },
+            {
+              id: '2-2',
+              name: '账户管理2',
+              type: 1,
+              icon: 'user',
+              level: 1,
+              show: true,
+              routeName: 'admin_account',
+              routeQuery: '{"id":10}',
+              routeParams: '{"type":"test2"}',
             },
           ],
         },

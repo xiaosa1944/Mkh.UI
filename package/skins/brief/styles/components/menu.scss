@@ -25,6 +25,10 @@
   .el-menu {
     border-right: none;
     background-color: transparent;
+
+    &.el-menu--collapse {
+      width: auto;
+    }
   }
 
   .el-menu-item,

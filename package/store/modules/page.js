@@ -12,7 +12,13 @@ const actions = {
    * @description 打开页面
    */
   open({ commit }, route) {
-    console.log('page:open', route)
+    commit('setCurrent', route)
+  },
+}
+
+const mutations = {
+  setCurrent(state, current) {
+    Object.assign(state.current, current)
   },
 }
 
@@ -20,4 +26,5 @@ export default {
   namespaced: true,
   state,
   actions,
+  mutations,
 }

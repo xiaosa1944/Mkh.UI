@@ -6,10 +6,8 @@
 <script>
 export default {
   setup() {
-    const { loginComponent } = MkhUI.config.site
-
     return {
-      loginComponent,
+      loginComponent: MkhUI.config.component.login,
     }
   },
 }

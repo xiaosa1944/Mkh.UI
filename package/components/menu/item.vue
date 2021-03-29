@@ -27,7 +27,7 @@ export default {
     const router = useRouter()
 
     const handleClick = menu => {
-      router.push({ name: menu.routeName })
+      router.push(menu.to)
     }
 
     return {

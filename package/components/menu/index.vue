@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import MenuItem from './item.vue'
 export default {
@@ -14,13 +14,14 @@ export default {
   components: { MenuItem },
   setup() {
     const store = useStore()
+    const { routeMenus, menus } = store.state.app.account
 
     const defaultActive = computed(() => {
       const { current } = store.state.app.page
-      if (current.name && routeMenus) {
-        let routeMenu = routeMenus.get(current.code)
+      if (current.fullPath && routeMenus) {
+        let routeMenu = routeMenus.get(current.fullPath)
         if (routeMenu) {
-          return routeMenu.menu.id
+          return routeMenu.id
         }
       }
       return '-1'
@@ -28,7 +29,7 @@ export default {
 
     return {
       defaultActive,
-      menus: store.state.app.account.menus,
+      menus,
       isCollapse: computed(() => store.state.app.skin.brief.menuIsCollapse),
     }
   },

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "20659236",
+      "name": "reduce",
+      "font_class": "reduce",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
       "icon_id": "5633951",
       "name": "code-branch",
       "font_class": "code-branch",

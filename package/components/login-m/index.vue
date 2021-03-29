@@ -7,86 +7,60 @@
       <h1 class="mu-login-m-title">{{ title }}</h1>
       <h4 class="mu-login-m-tip">请输入您的用户名和密码</h4>
       <el-form ref="formRef" class="mu-login-m-form" :model="model" :rules="rules">
-        <el-form-item prop="userName">
-          <el-input v-model="model.userName" placeholder="用户名">
+        <el-form-item prop="username">
+          <el-input v-model="model.username" placeholder="用户名" clearable>
             <template #prefix>
               <mu-icon name="user" />
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="model.password" type="password" autocomplete="off" placeholder="密码">
+          <el-input v-model="model.password" type="password" autocomplete="off" placeholder="密码" clearable>
             <template #prefix>
               <mu-icon name="lock" />
             </template>
           </el-input>
         </el-form-item>
-        <div class="mu-login-m-verifycode">
-          <div class="verifycode-input">
-            <el-form-item prop="code">
-              <el-input v-model="model.verifyCode.code" autocomplete="off" placeholder="验证码">
-                <template #prefix>
-                  <mu-icon name="adn"></mu-icon>
-                </template>
-              </el-input>
-            </el-form-item>
-          </div>
-          <div class="verifycode-img">
-            <el-tooltip effect="dark" content="点击刷新" placement="top">
-              <img :src="verifyCodeUrl" @click="refreshVerifyCode" />
-            </el-tooltip>
-          </div>
-        </div>
+        <mu-verifycode-input v-model="model.verifyCode.code" v-model:id="model.verifyCode.id" />
         <el-form-item>
-          <el-button class="mu-login-m-btn">登录</el-button>
+          <el-button class="mu-login-m-btn" :loading="loading" @click="tryLogin">{{ loading ? '登录中...' : '登录' }}</el-button>
         </el-form-item>
       </el-form>
     </div>
   </section>
 </template>
 <script>
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
+import useLogin from '../../composables/useLogin'
 export default {
   name: 'LoginM',
   setup() {
-    const { title, logo } = MkhUI.config.site
-    const formRef = ref(null)
     const model = reactive({ username: '', password: '', verifyCode: { id: '', code: '' } })
+    const { title, logo } = MkhUI.config.site
     const rules = {
-      userName: [
+      username: [
         {
           required: true,
           message: '请输入用户名',
-          trigger: 'change',
+          trigger: 'blur',
         },
       ],
       password: [
         {
           required: true,
           message: '请输入密码',
-          trigger: 'change',
+          trigger: 'blur',
         },
       ],
-      code: [
+      'verifyCode.code': [
         {
           required: true,
           message: '请输入验证码',
-          trigger: 'change',
+          trigger: 'blur',
         },
       ],
     }
-    const verifyCodeUrl = ref()
-
-    const { getVerifyCode } = MkhUI.config.actions
-
-    //刷新验证码
-    const refreshVerifyCode = () => {
-      getVerifyCode().then(data => {
-        verifyCodeUrl.value = data.base64String
-        model.verifyCode.id = data.id
-      })
-    }
-    refreshVerifyCode()
+    const { loading, formRef, tryLogin } = useLogin(model)
 
     return {
       title,
@@ -94,8 +68,8 @@ export default {
       formRef,
       model,
       rules,
-      verifyCodeUrl,
-      refreshVerifyCode,
+      loading,
+      tryLogin,
     }
   },
 }
@@ -163,18 +137,6 @@ export default {
         font-size: 17px;
         color: #888;
       }
-    }
-  }
-
-  &-verifycode {
-    position: relative;
-    padding-right: 110px;
-
-    .verifycode-img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      cursor: pointer;
     }
   }
 

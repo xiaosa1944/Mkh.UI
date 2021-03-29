@@ -27,7 +27,7 @@ export default {
     //监听皮肤切换
     watch(skinCode, app)
 
-    const noFrame = computed(() => route.meta.noFrame || true)
+    const noFrame = computed(() => route.meta.noFrame || false)
 
     return {
       skinCode,

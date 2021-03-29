@@ -6,7 +6,7 @@ export default {
   //路由名称，需要唯一，推荐使用模块编码+下划线开头
   name: 'admin_account',
   //路由路径
-  path: '/admin/account',
+  path: '/admin/account/:type',
   //绑定权限
   permissions: [],
   //绑定按钮

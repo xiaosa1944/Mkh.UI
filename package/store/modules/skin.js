@@ -32,7 +32,6 @@ const mutations = {
   },
   /**
    * @description 皮肤切换
-   * @param {Object} state 状态
    */
   toggle(state, code) {
     let skin = MkhUI.skins.find(m => m.code === code)

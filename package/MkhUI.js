@@ -21,8 +21,17 @@ window.MkhUI = {
       title: '',
       /**默认页，路由名称 */
       defaultPage: '',
-      /**登录组件，默认使用m */
-      loginComponent: 'm',
+    },
+    /**组件配置 */
+    component: {
+      /**加载动画 */
+      loading: {
+        loadingText: '正在努力加载...',
+        loadingBackground: 'rgba(255, 255, 255, 0.6)',
+        loadingSpinner: 'el-icon-loading',
+      },
+      /**登录组件，默认是mu-login-m */
+      login: 'm',
     },
     /**系统操作，供系统内部使用，用户需要通过替换默认操作方法来实现自定义功能 */
     actions: {
