@@ -1,0 +1,29 @@
+#{$prefix}-flex-column {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+
+  &.top {
+    #{$prefix}-flex-column_top {
+      flex-shrink: 0;
+    }
+
+    #{$prefix}-flex-column_bottom {
+      flex-grow: 1;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+  }
+
+  &.bottom {
+    #{$prefix}-flex-column_top {
+      flex-grow: 1;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    #{$prefix}-flex-column_bottom {
+      flex-shrink: 0;
+    }
+  }
+}

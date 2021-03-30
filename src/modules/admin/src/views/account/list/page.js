@@ -7,6 +7,7 @@ export default {
   name: 'admin_account',
   //路由路径
   path: '/admin/account/:type',
+  props: true,
   //绑定权限
   permissions: [],
   //绑定按钮

@@ -1,0 +1,29 @@
+#{$prefix}-flex-row {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+
+  &.left {
+    #{$prefix}-flex-row_left {
+      flex-shrink: 0;
+    }
+
+    #{$prefix}-flex-row_right {
+      flex-grow: 1;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+  }
+
+  &.right {
+    #{$prefix}-flex-row_left {
+      flex-grow: 1;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    #{$prefix}-flex-row_right {
+      flex-shrink: 0;
+    }
+  }
+}

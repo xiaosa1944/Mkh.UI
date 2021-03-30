@@ -19,7 +19,7 @@ export default {
 
     //给body附加皮肤class
     const app = () => {
-      document.body.className = skinCode.value
+      document.body.className = `${skinCode.value} theme-${store.state.app.skin.theme}`
     }
 
     app()

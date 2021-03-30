@@ -1,5 +1,5 @@
 <template>
-  <div class="mu-header_toolbar_item">
+  <div class="mu-toolbar_item">
     <mu-icon :name="state ? 'reduce' : 'expand'" @click="handleClick"></mu-icon>
   </div>
 </template>

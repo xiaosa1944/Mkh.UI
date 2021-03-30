@@ -1,7 +1,7 @@
 <template>
   <div :class="['mu-menu', isCollapse ? 'is-collapse' : '']">
     <mu-scrollbar>
-      <el-menu :default-active="defaultActive" class="mu-menu-wrapper" :collapse="isCollapse"> <menu-item :menus="menus" /> </el-menu>
+      <el-menu :default-active="defaultActive" class="mu-menu_wrapper" :collapse="isCollapse"> <menu-item :menus="menus" /> </el-menu>
     </mu-scrollbar>
   </div>
 </template>

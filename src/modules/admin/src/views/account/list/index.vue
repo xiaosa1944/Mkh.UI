@@ -1,9 +1,19 @@
 <template>
   <mu-container>
-    <h1>账户管理</h1>
-    <el-button type="primary" @click="$router.push('/admin/role')">角色管理</el-button>
-    <el-button type="warning" @click="$router.push('/admin/account/add')">子路由</el-button>
-    <el-button type="danger" @click="$router.push('/admin/account/edit')">编辑子路由</el-button>
+    <h1>账户管理--{{ type }}</h1>
+    <mu-button type="primary" text="角色管理" icon="truck-monster" to="/admin/role" />
+    <mu-button type="warning" text="子路由" to="/admin/account/add" />
+    <mu-button type="danger" text="编辑子路由" to="/admin/account/edit" />
     <router-view></router-view>
   </mu-container>
 </template>
+<script>
+export default {
+  props: {
+    type: {
+      type: String,
+      default: null,
+    },
+  },
+}
+</script>

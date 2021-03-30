@@ -1,0 +1,10 @@
+#{$prefix}-fade-enter-active,
+#{$prefix}-fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+#{$prefix}-fade-enter-from,
+#{$prefix}-fade-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}

@@ -26,12 +26,14 @@ const page2route = (page, parentRoute, pages) => {
    * buttons              页面绑定的按钮信息
    * breadcrumbs          页面的面包屑信息
    * cache                页面是否缓存，路由的keep-alive特性
+   * props                路由启用props特性
    */
-  const { title, icon, path, name, component, noFrame, noPermissionValidate, permissions, buttons, breadcrumbs, cache } = page
+  const { title, icon, path, name, component, noFrame, noPermissionValidate, permissions, buttons, breadcrumbs, cache, props } = page
   const route = {
     path,
     name,
     component,
+    props,
     meta: {
       title,
       icon,

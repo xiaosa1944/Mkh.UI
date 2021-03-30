@@ -1,9 +1,9 @@
 <template>
   <div class="mu-wrapper">
     <mu-header />
-    <div class="mu-breadcrumb">
+    <div class="mu-sub-header">
       <!--菜单折叠-->
-      <mu-icon class="mu-breadcrumb_menu" :name="menuCollapseIcon" @click="handleMeunCollapse" />
+      <mu-icon class="mu-sub-header_menu" :name="menuCollapseIcon" @click="handleMeunCollapse" />
       <mu-breadcrumb />
     </div>
     <mu-main />

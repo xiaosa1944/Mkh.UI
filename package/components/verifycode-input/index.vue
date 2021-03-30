@@ -1,5 +1,5 @@
 <template>
-  <div class="verifycode-input">
+  <div class="mu-verifycode-input">
     <div>
       <el-form-item :label="label" :prop="prop">
         <el-input :model-value="modelValue" autocomplete="off" placeholder="验证码" clearable @input="handleInput">
@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import { computed, ref, toRefs, watch } from 'vue'
+import { ref } from 'vue'
 export default {
   name: 'VerifycodeInput',
   props: {
@@ -65,16 +65,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.verifycode-input {
-  position: relative;
-  padding-right: 110px;
-
-  &_img {
-    position: absolute;
-    bottom: -3px;
-    right: 0;
-    cursor: pointer;
-  }
-}
-</style>

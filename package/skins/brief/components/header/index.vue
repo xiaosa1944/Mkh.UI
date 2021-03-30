@@ -33,6 +33,8 @@
       </div>
       <!--工具栏-->
       <div class="mu-header_toolbar">
+        <!--皮肤-->
+        <mu-toolbar-skin />
         <!--全屏-->
         <mu-toolbar-fullscreen />
       </div>

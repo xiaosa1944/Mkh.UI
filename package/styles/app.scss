@@ -1,25 +1,4 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial;
-  font-size: 12px;
-  height: 100%;
-}
-
-*,
-::after,
-::before {
-  box-sizing: border-box;
-}
-
-#app {
-  height: 100%;
-}
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-@import './animations/index';
+@import './var';
+@import './reset';
+@import './animations';
+@import './components';

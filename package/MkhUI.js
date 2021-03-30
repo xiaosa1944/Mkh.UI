@@ -26,9 +26,9 @@ window.MkhUI = {
     component: {
       /**加载动画 */
       loading: {
-        loadingText: '正在努力加载...',
-        loadingBackground: 'rgba(255, 255, 255, 0.6)',
-        loadingSpinner: 'el-icon-loading',
+        text: '正在努力加载...',
+        background: 'rgba(255, 255, 255, 0.6)',
+        spinner: 'el-icon-loading',
       },
       /**登录组件，默认是mu-login-m */
       login: 'm',

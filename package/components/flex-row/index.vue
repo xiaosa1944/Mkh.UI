@@ -41,35 +41,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-$prefix: '.mu-flex-row';
-#{$prefix} {
-  display: flex;
-  align-items: stretch;
-  flex-direction: row;
-
-  &.left {
-    #{$prefix}_left {
-      flex-shrink: 0;
-    }
-
-    #{$prefix}_right {
-      flex-grow: 1;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-  }
-
-  &.right {
-    #{$prefix}_left {
-      flex-grow: 1;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    #{$prefix}_right {
-      flex-shrink: 0;
-    }
-  }
-}
-</style>

@@ -32,35 +32,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-$prefix: 'mu-flex-column';
-.#{$prefix} {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-
-  &.top {
-    #{$prefix}_top {
-      flex-shrink: 0;
-    }
-
-    #{$prefix}_bottom {
-      flex-grow: 1;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-  }
-
-  &.bottom {
-    #{$prefix}_top {
-      flex-grow: 1;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    #{$prefix}_bottom {
-      flex-shrink: 0;
-    }
-  }
-}
-</style>

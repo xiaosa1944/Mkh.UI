@@ -26,21 +26,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.mu-scrollbar {
-  height: 100%;
-  .el-scrollbar__wrap {
-    overflow-x: hidden;
-  }
-
-  .el-scrollbar__bar.is-horizontal {
-    display: none;
-  }
-
-  &.is-horizontal {
-    .el-scrollbar__bar.is-horizontal {
-      display: block;
-    }
-  }
-}
-</style>

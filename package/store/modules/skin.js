@@ -6,7 +6,7 @@ const state = {
   /** 编码 */
   code: 'brief',
   /** 主题 */
-  theme: '',
+  theme: 'dark',
   /** 字号 */
   fontSize: 'small',
 }
