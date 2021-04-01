@@ -9,7 +9,6 @@
           </transition>
         </router-view>
       </div>
-      <div class="mu-footer">Copyright © 2021 17MKH, All rights reserved.</div>
     </div>
   </div>
 </template>

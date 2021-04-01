@@ -1,8 +1,8 @@
 import './MkhUI'
 import { createApp } from 'vue'
 import Layout from './layout.vue'
-import mkhRouter from './router'
-import mkhStore, { store } from './store'
+import MkhRouter, { router } from './router'
+import MkhStore, { store } from './store'
 //导入ElementPlus
 import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
@@ -24,25 +24,16 @@ const start = async () => {
   MkhUI.modules = MkhUI.modules.sort((a, b) => a.id - b.id)
 
   //注册路由
-  app.use(mkhRouter, MkhUI.modules)
+  app.use(MkhRouter, MkhUI.modules)
 
   //注册状态
-  app.use(mkhStore, MkhUI.modules)
+  app.use(MkhStore, MkhUI.modules)
 
   //注册ElementPlus
   app.use(ElementPlus, { locale })
 
   //注册全局组件
   app.use(Components)
-
-  //注册模块的全局组件
-  MkhUI.modules.forEach(m => {
-    if (m.components) {
-      m.components.forEach(c => {
-        app.component(`mu-${m.code}-${c.name}`, c.component)
-      })
-    }
-  })
 
   //注册皮肤
   MkhUI.skins.forEach(skin => {
@@ -52,6 +43,21 @@ const start = async () => {
     // 注册状态
     if (skin.store) {
       store.registerModule(['app', 'skin', skin.code], skin.store)
+    }
+  })
+
+  //加载模块
+  MkhUI.modules.forEach(m => {
+    //注册全局组件
+    if (m.components) {
+      m.components.forEach(c => {
+        app.component(`mu-${m.code}-${c.name}`, c.component)
+      })
+    }
+
+    //执行回调函数
+    if (m.callback) {
+      m.callback({ app, router, store })
     }
   })
 

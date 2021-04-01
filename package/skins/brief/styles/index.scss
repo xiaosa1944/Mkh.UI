@@ -157,21 +157,12 @@ $skin-brief-breadcrumb-height: 50px;
   #{$prefix}-content {
     position: relative;
     flex-grow: 1;
-    padding: 15px 15px 35px 15px;
+    padding: 15px;
 
     #{$prefix}-content_wrapper {
       position: relative;
       height: 100%;
     }
-  }
-
-  #{$prefix}-footer {
-    position: absolute;
-    bottom: 5px;
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
   }
 
   /***********************菜单***************************/
@@ -206,6 +197,15 @@ $skin-brief-breadcrumb-height: 50px;
 
       &.el-menu--collapse {
         width: auto;
+
+        .el-menu-item,
+        .el-submenu__title {
+          text-align: center;
+
+          #{$prefix}-icon {
+            margin-right: 0;
+          }
+        }
       }
     }
 

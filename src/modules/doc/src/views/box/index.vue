@@ -1,7 +1,9 @@
 <template>
-  <mu-container>
-    <demo-1></demo-1>
-    <mu-doc-component-props :code="component" />
+  <mu-container scrollbar>
+    <h1>基础用法</h1>
+    <mu-doc-demo-block :meta="component">
+      <demo-1></demo-1>
+    </mu-doc-demo-block>
   </mu-container>
 </template>
 <script>
@@ -11,9 +13,9 @@ import component from '!/package/components/box/index.vue'
 export default {
   components: { demo1 },
   setup() {
-    console.log(component)
     return {
       component,
+      code,
     }
   },
 }

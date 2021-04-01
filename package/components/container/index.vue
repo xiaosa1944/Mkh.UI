@@ -1,7 +1,7 @@
 <template>
   <section class="mu-container" :class="{ 'is-horizontal': horizontal }">
     <section class="mu-container_main">
-      <mu-scrollbar v-if="scrollbar" :horizontal="horizontal">
+      <mu-scrollbar v-if="scrollbar" ref="scrollbarRef" :horizontal="horizontal">
         <slot />
       </mu-scrollbar>
       <slot v-else />
@@ -9,6 +9,7 @@
   </section>
 </template>
 <script>
+import { ref } from 'vue'
 export default {
   name: 'Container',
   props: {
@@ -16,6 +17,18 @@ export default {
     scrollbar: Boolean,
     /** 是否显示水平滚动条 */
     horizontal: Boolean,
+  },
+  setup() {
+    const scrollbarRef = ref()
+    //更新滚动条
+    const updateScrollbar = () => {
+      scrollbarRef.value.update()
+    }
+
+    return {
+      scrollbarRef,
+      updateScrollbar,
+    }
   },
 }
 </script>

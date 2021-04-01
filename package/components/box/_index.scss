@@ -4,6 +4,7 @@
   border-radius: 3px;
   overflow: hidden;
   background-color: #fff;
+  border: 1px solid $border-color-1;
 
   > #{$prefix}-box_header {
     padding: 0 5px;
@@ -22,7 +23,7 @@
 
       #{$prefix}-icon {
         margin-top: 6px;
-        font-size: 18px;
+        font-size: 36px;
         padding: 7px;
         border-radius: 17px;
       }
@@ -57,12 +58,17 @@
         width: 30px;
         height: 30px;
 
+        #{$prefix}-icon {
+          transform: none;
+        }
+
         &.is-disabled {
           cursor: not-allowed;
           span {
             color: #c0c4cc;
           }
         }
+
         &:not(.is-disabled):hover {
           color: $text-color-1;
           transform: scale(1.2);
