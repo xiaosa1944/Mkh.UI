@@ -1,6 +1,6 @@
 <template>
   <div class="mu-toolbar_item">
-    <mu-icon name="tshirt"></mu-icon>
+    <mu-icon name="skin"></mu-icon>
   </div>
 </template>
 <script>

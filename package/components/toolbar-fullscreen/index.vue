@@ -1,6 +1,6 @@
 <template>
   <div class="mu-toolbar_item">
-    <mu-icon :name="state ? 'reduce' : 'expand'" @click="handleClick"></mu-icon>
+    <mu-icon :name="state ? 'full-screen-exit' : 'full-screen'" @click="handleClick"></mu-icon>
   </div>
 </template>
 <script>

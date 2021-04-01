@@ -18,7 +18,7 @@ export default {
   components: { MuHeader, MuMain },
   setup() {
     const store = useStore()
-    const menuCollapseIcon = computed(() => (store.state.app.skin.brief.menuIsCollapse ? 'indent' : 'outdent'))
+    const menuCollapseIcon = computed(() => (store.state.app.skin.brief.menuIsCollapse ? 'unfold' : 'fold'))
 
     const handleMeunCollapse = () => {
       store.commit('app/skin/brief/collapseMenu')

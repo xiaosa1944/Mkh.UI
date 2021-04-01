@@ -24,7 +24,7 @@
                 账户信息
               </el-dropdown-item>
               <el-dropdown-item divided command="logout">
-                <mu-icon name="sign-out-alt"></mu-icon>
+                <mu-icon name="sign-out"></mu-icon>
                 退出登录
               </el-dropdown-item>
             </el-dropdown-menu>

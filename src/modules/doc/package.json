@@ -1,8 +1,8 @@
 {
   "id": 1,
-  "name": "@mkh/mod-blog",
+  "name": "@mkh/mod-doc",
   "version": "0.0.2",
-  "description": "17MKH博客管理模块",
+  "description": "17MKH文档模块",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

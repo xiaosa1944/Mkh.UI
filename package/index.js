@@ -6,6 +6,7 @@ import mkhStore, { store } from './store'
 //导入ElementPlus
 import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
+import 'element-plus/lib/theme-chalk/display.css'
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import Components from './components'
 import './styles/app.scss'
@@ -33,6 +34,15 @@ const start = async () => {
 
   //注册全局组件
   app.use(Components)
+
+  //注册模块的全局组件
+  MkhUI.modules.forEach(m => {
+    if (m.components) {
+      m.components.forEach(c => {
+        app.component(`mu-${m.code}-${c.name}`, c.component)
+      })
+    }
+  })
 
   //注册皮肤
   MkhUI.skins.forEach(skin => {

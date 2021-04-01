@@ -21,7 +21,9 @@
   </el-button>
 </template>
 <script>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 export default {
   name: 'Button',
   props: {
@@ -76,6 +78,11 @@ export default {
   emits: ['click'],
   setup(props, ctx) {
     const router = useRouter()
+    const store = useStore()
+
+    //默认字号
+    const fontSize = computed(() => store.state.app.account.skin.fontSize)
+
     const handleClick = () => {
       if (props.to) {
         router.push(props.to)
@@ -85,6 +92,7 @@ export default {
     }
 
     return {
+      fontSize,
       handleClick,
     }
   },

@@ -4,7 +4,7 @@
       <el-form-item :label="label" :prop="prop">
         <el-input :model-value="modelValue" autocomplete="off" placeholder="验证码" clearable @input="handleInput">
           <template #prefix>
-            <mu-icon name="adn"></mu-icon>
+            <mu-icon name="captcha"></mu-icon>
           </template>
         </el-input>
       </el-form-item>
