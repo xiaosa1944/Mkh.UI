@@ -10,25 +10,25 @@
     <!--头部-->
     <header v-if="header" class="mu-box_header">
       <slot name="header">
-        <div v-if="icon" class="mu-box_header_icon">
-          <mu-icon :name="icon" />
+        <div v-if="icon" class="mu-box_icon">
+          <mu-icon :name="icon" :style="{ color: iconColor }" />
         </div>
         <!--标题-->
-        <div class="mu-box_header_title">
+        <div class="mu-box_title">
           <slot name="title">{{ title }}</slot>
         </div>
         <!--工具栏前面的区域-->
-        <div class="mu-box_header_toolbar_before">
+        <div class="mu-box_toolbar_before">
           <slot name="toolbar-before" />
         </div>
         <!--工具栏-->
-        <div ref="toolbar" class="mu-box_header_toolbar">
+        <div class="mu-box_toolbar">
           <!--工具栏插槽-->
           <slot name="toolbar" />
           <!--刷新按钮-->
           <mu-button v-if="toolbar.refresh" icon="refresh" @click="$emit('refresh')" />
           <!--折叠按钮，页模式下折叠功能无效-->
-          <mu-button v-if="toolbar.collapse || !page" :icon="isCollapse ? 'chevron-down' : 'chevron-up'" @click="toggleCollapse" />
+          <mu-button v-if="toolbar.collapse" :icon="isCollapse ? 'chevron-down' : 'chevron-up'" @click="toggleCollapse" />
           <!--全屏按钮-->
           <mu-button v-if="toolbar.fullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
         </div>
@@ -37,11 +37,9 @@
     <el-collapse-transition>
       <section v-show="!isCollapse" class="mu-box_dialog">
         <section class="mu-box_content">
-          <section v-if="showScrollbar" class="mu-box_wrapper">
-            <mu-scrollbar ref="scrollbarRef" :horizontal="horizontal">
-              <slot />
-            </mu-scrollbar>
-          </section>
+          <mu-scrollbar v-if="showScrollbar" ref="scrollbarRef" :horizontal="horizontal">
+            <slot />
+          </mu-scrollbar>
           <slot v-else />
         </section>
         <footer v-if="footer" :class="['mu-box_footer', footerAlign]">
@@ -66,6 +64,11 @@ export default {
     },
     /** 图标 */
     icon: {
+      type: String,
+      default: null,
+    },
+    /** 图标颜色 */
+    iconColor: {
       type: String,
       default: null,
     },
@@ -135,11 +138,11 @@ export default {
       default() {
         return {
           /** 刷新 */
-          refresh: true,
+          refresh: false,
           /** 折叠 */
-          collapse: true,
+          collapse: false,
           /** 全屏 */
-          fullscreen: true,
+          fullscreen: false,
         }
       },
     },

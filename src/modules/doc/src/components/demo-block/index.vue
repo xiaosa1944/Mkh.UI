@@ -1,11 +1,21 @@
 <template>
   <div class="mu-demo-block">
+    <h1 class="title">
+      <slot name="title">
+        {{ title }}
+      </slot>
+    </h1>
+    <p class="desc">
+      <slot name="desc">
+        {{ desc }}
+      </slot>
+    </p>
     <div class="source">
       <slot />
     </div>
     <el-collapse-transition>
       <div v-show="showMeta" class="meta">
-        <pre><code ref="codeRef" class="html hljs xml" v-text="meta"></code></pre>
+        <mu-doc-highlightjs :code="meta"></mu-doc-highlightjs>
       </div>
     </el-collapse-transition>
     <el-affix position="bottom" :offset="0">
@@ -16,28 +26,30 @@
   </div>
 </template>
 <script>
-import hljs from 'highlight.js'
-import 'highlight.js/styles/color-brewer.css'
-import { getCurrentInstance, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 export default {
   props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    desc: {
+      type: String,
+      required: true,
+    },
     meta: {
       type: String,
       required: true,
     },
   },
-  setup(props) {
+  setup() {
     const codeRef = ref()
     const showMeta = ref(false)
 
     const handleShowMeta = () => {
       showMeta.value = !showMeta.value
     }
-
-    onMounted(() => {
-      hljs.highlightElement(codeRef.value)
-    })
 
     return {
       codeRef,
@@ -49,20 +61,32 @@ export default {
 </script>
 <style lang="scss">
 .mu-demo-block {
+  .title {
+    margin: 55px 0 20px;
+    font-weight: 400;
+    font-size: 23px;
+    color: #1f2f3d;
+  }
+  .desc {
+    font-size: 14px;
+    color: #5e6d82;
+    line-height: 1.5em;
+
+    code {
+      padding: 4px;
+      margin: 0 4px;
+      border: 1px solid #eaeefb;
+      border-radius: 4px;
+      background-color: #e4e7ed;
+      color: #409eff;
+    }
+  }
   .source {
     padding: 24px;
     background: #fff;
-  }
 
-  .meta {
-    pre {
-      margin: 0;
-    }
-    .hljs,
-    .hljs-subst {
-      padding: 18px 24px;
-      font-size: 14px;
-      background-color: #fafafa;
+    .el-link {
+      margin: 0 5px;
     }
   }
 

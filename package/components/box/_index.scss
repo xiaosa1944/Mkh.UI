@@ -1,62 +1,67 @@
-#{$prefix}-box {
-  box-shadow: $box-shadow;
+$p: #{$prefix}-box;
+
+#{$p} {
   @include flex-column();
   border-radius: 3px;
   overflow: hidden;
   background-color: #fff;
-  border: 1px solid $border-color-1;
+  border-width: 1px 1px 0 1px;
+  border-style: solid;
+  border-color: $border-color-1;
+  box-shadow: $box-shadow;
 
-  > #{$prefix}-box_header {
+  /*头部*/
+  > #{$p}_header {
     padding: 0 5px;
     display: flex;
     align-items: stretch;
     flex-shrink: 0;
     @include vertical-center(46px);
     border-bottom: 1px solid $border-color-3;
-    box-sizing: border-box;
+    background-color: #f8f8f8;
 
-    #{$prefix}-box_header_icon {
-      padding: 0 8px 0 3px;
-      font-size: 1.5rem;
-      text-align: center;
+    /*头部左侧图标*/
+    #{$p}_icon {
       flex-shrink: 0;
+      text-align: center;
 
       #{$prefix}-icon {
         margin-top: 6px;
-        font-size: 36px;
         padding: 7px;
-        border-radius: 17px;
+        font-size: 34px;
       }
     }
 
-    #{$prefix}-box_header_title {
+    /*标题*/
+    #{$p}_title {
       flex-grow: 1;
       font-size: 16px;
       font-weight: 400;
     }
 
-    #{$prefix}-box_header_toolbar_before {
+    /*工具栏前面区域*/
+    #{$p}_toolbar_before {
       flex-grow: 1;
     }
 
-    #{$prefix}-box_header_toolbar {
+    //工具栏
+    #{$p}_toolbar {
       position: relative;
       flex-shrink: 0;
 
       #{$prefix}-button {
-        margin-left: 0;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
         padding: 10px 7px;
-        color: $text-color-3;
+        margin-left: 0;
+        width: 30px;
+        height: 30px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
         user-select: none;
         outline: none;
         transition: all 0.2s ease-in-out;
-        font-size: 16px;
-        width: 30px;
-        height: 30px;
+        color: $text-color-3;
+        background-color: transparent;
 
         #{$prefix}-icon {
           transform: none;
@@ -64,6 +69,7 @@
 
         &.is-disabled {
           cursor: not-allowed;
+
           span {
             color: #c0c4cc;
           }
@@ -77,29 +83,25 @@
     }
   }
 
-  > #{$prefix}-box_dialog {
+  /**/
+  > #{$p}_dialog {
     position: relative;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
     @include flex-column();
     flex-grow: 1;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 
-    > #{$prefix}-box_content {
+    > #{$p}_content {
       position: relative;
       padding: 10px;
       flex-grow: 1;
-      box-sizing: border-box;
     }
 
-    > #{$prefix}-box_footer {
-      padding: 0 10px;
+    > #{$p}_footer {
+      padding: 5px 10px;
       flex-shrink: 0;
-      flex-grow: 0;
-      height: 42px;
-      line-height: 41px;
       border-top: 1px solid $border-color-3;
       text-align: right;
-      box-sizing: border-box;
 
       &.left {
         text-align: left;
@@ -180,6 +182,14 @@
           }
         }
       }
+    }
+  }
+}
+
+#{$p}-row {
+  .el-col {
+    > #{$prefix}-box {
+      height: 100%;
     }
   }
 }

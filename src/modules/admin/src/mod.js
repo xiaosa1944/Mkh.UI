@@ -12,7 +12,7 @@ mod.components = components
 MkhUI.useModule(mod)
 
 //配置登录组件
-MkhUI.config.component.login = 'h'
+MkhUI.config.component.login = 'k'
 //设置登录方法
 MkhUI.config.actions.login = api.login
 //设置获取验证码方法
