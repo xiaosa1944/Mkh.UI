@@ -1,9 +1,11 @@
 #{$prefix}-button {
-  #{$prefix}-icon {
-    transform: scale(1.4);
-  }
-
   #{$prefix}-icon + &_text {
     margin-left: 10px;
+  }
+}
+
+.el-button--text {
+  #{$prefix}-icon + #{$prefix}-button_text {
+    margin-left: 5px !important;
   }
 }

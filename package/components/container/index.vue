@@ -21,13 +21,13 @@ export default {
   setup() {
     const scrollbarRef = ref()
     //更新滚动条
-    const updateScrollbar = () => {
+    const resizeScrollbar = () => {
       scrollbarRef.value.update()
     }
 
     return {
       scrollbarRef,
-      updateScrollbar,
+      resizeScrollbar,
     }
   },
 }

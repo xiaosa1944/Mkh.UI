@@ -37,7 +37,7 @@
     <el-collapse-transition>
       <section v-show="!isCollapse" class="mu-box_dialog">
         <section class="mu-box_content">
-          <mu-scrollbar v-if="showScrollbar" ref="scrollbarRef" :horizontal="horizontal">
+          <mu-scrollbar v-if="showScrollbar" ref="scrollbarRef" :horizontal="horizontalScrollbar">
             <slot />
           </mu-scrollbar>
           <slot v-else />
@@ -93,7 +93,7 @@ export default {
       default: null,
     },
     /** 是否显示水平滚动条 */
-    horizontal: {
+    horizontalScrollbar: {
       type: Boolean,
       default: false,
     },

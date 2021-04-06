@@ -1,6 +1,7 @@
 import Box from './box/index.vue'
 import Breadcrumb from './breadcrumb/index.vue'
 import Button from './button/index.vue'
+import ButtonDelete from './button-delete/index.vue'
 import Container from './container/index.vue'
 import FlexColumn from './flex-column/index.vue'
 import FlexRow from './flex-row/index.vue'
@@ -14,7 +15,7 @@ import ToolbarFullscreen from './toolbar-fullscreen/index.vue'
 import ToolbarSkin from './toolbar-skin/index.vue'
 import VerifycodeInput from './verifycode-input/index.vue'
 
-const components = [Box, Breadcrumb, Button, Container, FlexColumn, FlexRow, Icon, LoginH, LoginK, LoginM, Menu, Scrollbar, ToolbarFullscreen, ToolbarSkin, VerifycodeInput]
+const components = [Box, Breadcrumb, Button, ButtonDelete, Container, FlexColumn, FlexRow, Icon, LoginH, LoginK, LoginM, Menu, Scrollbar, ToolbarFullscreen, ToolbarSkin, VerifycodeInput]
 
 export default app => {
   components.forEach(m => {

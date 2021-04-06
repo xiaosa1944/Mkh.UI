@@ -1,3 +1,4 @@
+import menus from './menus'
 /**
  * @description 登录接口
  */
@@ -48,56 +49,7 @@ const getAccountInfo = () => {
       /**头像 */
       avatar: '',
       /** 菜单列表 */
-      menus: [
-        {
-          id: '1',
-          name: '首页',
-          type: 1,
-          icon: 'home',
-          level: 1,
-          show: true,
-          routeName: 'default',
-        },
-        {
-          id: '2',
-          name: '权限管理',
-          type: 0,
-          icon: 'key',
-          level: 1,
-          show: true,
-          children: [
-            {
-              id: '2-1',
-              name: '账户管理',
-              type: 1,
-              icon: 'user',
-              level: 2,
-              show: true,
-              routeName: 'admin_account',
-            },
-          ],
-        },
-        {
-          id: '3',
-          name: '基础组件',
-          type: 0,
-          icon: 'component',
-          level: 1,
-          show: true,
-          routeName: 'default',
-          children: [
-            {
-              id: '3-1',
-              name: '盒子',
-              type: 1,
-              icon: 'box',
-              level: 2,
-              show: true,
-              routeName: 'doc_box',
-            },
-          ],
-        },
-      ],
+      menus,
       /** 权限列表 */
       permissions: [],
       /** 按钮列表 */

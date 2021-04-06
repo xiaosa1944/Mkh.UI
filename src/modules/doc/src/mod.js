@@ -1,6 +1,5 @@
 import pkg from '../package.json'
 import { pages, components } from '@mkh-module'
-import './styles/index.scss'
 import VCharts from 'vue-echarts'
 import * as echarts from 'echarts'
 

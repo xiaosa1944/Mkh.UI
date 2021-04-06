@@ -1,0 +1,122 @@
+<template>
+  <mu-button
+    class="mu-button-delete"
+    :type="type"
+    :size="size"
+    :plain="plain"
+    :round="round"
+    :circle="circle"
+    :loading="loading"
+    :disabled="disabled"
+    :autofocus="autofocus"
+    :native-type="nativeType"
+    :icon="icon"
+    :text="text"
+    :code="code"
+    @click="handleClick"
+  >
+  </mu-button>
+</template>
+<script>
+import { getCurrentInstance } from 'vue'
+import useLoading from '../../composables/useLoading'
+export default {
+  name: 'ButtonDelete',
+  props: {
+    /** 尺寸，默认按照框架的字号设置 */
+    size: {
+      type: String,
+      default: null,
+    },
+    /** 类型 primary/success/warning/danger/info/text */
+    type: {
+      type: String,
+      default: 'text',
+    },
+    /** 是否朴素按钮 */
+    plain: Boolean,
+    /** 是否圆角按钮 */
+    round: Boolean,
+    /** 是否圆形按钮 */
+    circle: Boolean,
+    /** 是否加载中状态 */
+    loading: Boolean,
+    /** 是否禁用状态 */
+    disabled: Boolean,
+    /** 是否默认聚焦 */
+    autofocus: Boolean,
+    /** 原生 type 属性 button/submit/reset */
+    nativeType: {
+      type: String,
+      default: 'button',
+    },
+    /** 图标 */
+    icon: {
+      type: String,
+      default: 'delete',
+    },
+    /** 文本 */
+    text: {
+      type: String,
+      default: '删除',
+    },
+    /** 按钮编码，用于按钮权限控制 */
+    code: {
+      type: String,
+      default: '',
+    },
+    /** 请求参数 */
+    data: {
+      type: [String, Number],
+      default: '',
+    },
+    /** 二次确认的消息 */
+    msg: {
+      type: String,
+      default: '您确认要删除该数据吗?',
+    },
+    /** 删除方法，需返回Promise */
+    action: {
+      type: Function,
+      required: true,
+    },
+  },
+  emits: ['success', 'error'],
+  setup(props, ctx) {
+    const { $confirm, $message } = getCurrentInstance().proxy
+
+    const loading = useLoading()
+
+    const handleClick = () => {
+      $confirm(props.msg, '删除提示', {
+        type: 'warning',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      })
+        .then(() => {
+          loading.open('正在删除数据，请稍后...')
+          props
+            .action(props.data)
+            .then(() => {
+              $message.success({
+                message: '删除成功~',
+                type: 'success',
+              })
+              ctx.emit('success')
+            })
+            .catch(() => {
+              ctx.emit('error')
+            })
+            .finally(() => {
+              loading.close()
+            })
+        })
+        .catch(() => {})
+    }
+
+    return {
+      handleClick,
+    }
+  },
+}
+</script>

@@ -1,5 +1,5 @@
 <template>
-  <el-row class="mu-box-row" :gutter="20" style="height: 300px">
+  <el-row class="mu-box-row" :gutter="20" style="height: 600px">
     <el-col :span="16">
       <mu-box header title="每日BUG数" icon="chart-pie-fill">
         <v-chart :option="option" />
@@ -11,18 +11,6 @@
       </mu-box>
     </el-col>
   </el-row>
-  <!-- <el-row class="mu-box-row" :gutter="20" style="height: 400px">
-    <el-col :span="16">
-      <mu-box header title="某站点用户访问来源" icon="chart-pie-fill">
-        <v-chart :option="option" />
-      </mu-box>
-    </el-col>
-    <el-col :span="8">
-      <mu-box header title="堆叠区域图" icon="chart-line-fill-3">
-        <v-chart :option="option1" />
-      </mu-box>
-    </el-col>
-  </el-row> -->
 </template>
 <script>
 import { getCurrentInstance, ref } from 'vue'

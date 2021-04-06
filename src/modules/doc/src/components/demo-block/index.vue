@@ -1,5 +1,5 @@
 <template>
-  <div class="mu-demo-block">
+  <div class="mu-doc-demo-block">
     <h1 class="title">
       <slot name="title">
         {{ title }}
@@ -18,15 +18,13 @@
         <mu-doc-highlightjs :code="meta"></mu-doc-highlightjs>
       </div>
     </el-collapse-transition>
-    <el-affix position="bottom" :offset="0">
-      <div class="control" @click="handleShowMeta">
-        <mu-button type="text" icon="code" :text="showMeta ? '隐藏代码' : '显示代码'" />
-      </div>
-    </el-affix>
+    <div v-show="meta" class="control" @click="handleShowMeta">
+      <mu-button type="text" icon="code" :text="showMeta ? '隐藏代码' : '显示代码'" />
+    </div>
   </div>
 </template>
 <script>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 export default {
   props: {
@@ -36,11 +34,11 @@ export default {
     },
     desc: {
       type: String,
-      required: true,
+      default: '',
     },
     meta: {
       type: String,
-      required: true,
+      default: '',
     },
   },
   setup() {
@@ -60,11 +58,13 @@ export default {
 }
 </script>
 <style lang="scss">
-.mu-demo-block {
+.mu-doc-demo-block {
+  padding: 15px 15px 0 15px;
+
   .title {
-    margin: 55px 0 20px;
-    font-weight: 400;
-    font-size: 23px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 25px;
     color: #1f2f3d;
   }
   .desc {
@@ -82,7 +82,7 @@ export default {
     }
   }
   .source {
-    padding: 24px;
+    margin-bottom: 15px;
     background: #fff;
 
     .el-link {
@@ -90,28 +90,28 @@ export default {
     }
   }
 
+  .meta {
+    margin-bottom: 15px;
+  }
+
   .control {
-    border-top: 1px solid #eaeefb;
     height: 44px;
     box-sizing: border-box;
-    background-color: #fff;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-radius: 5px;
     text-align: center;
-    margin-top: -1px;
     cursor: pointer;
     position: relative;
     transition: all 0.3s;
+    background-color: #f9fafc;
 
     .el-button--text {
-      color: #d3dce6;
+      color: #409eff;
     }
 
     &:hover {
-      background-color: #f9fafc;
-
+      background-color: #66b1ff;
       .el-button--text {
-        color: #409eff;
+        color: #fff;
       }
     }
   }

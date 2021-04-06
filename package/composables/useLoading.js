@@ -5,8 +5,8 @@ export default function () {
   const defaultOptions = MkhUI.config.component.$loading
   let loading
 
-  const open = options => {
-    loading = $loading(Object.assign({}, defaultOptions, options))
+  const open = (text, options) => {
+    loading = $loading(Object.assign({}, defaultOptions, { text }, options))
   }
 
   const close = () => {

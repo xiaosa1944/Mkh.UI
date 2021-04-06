@@ -9,7 +9,7 @@
         </el-input>
       </el-form-item>
     </div>
-    <div class="verifycode-input_img">
+    <div class="mu-verifycode-input_img">
       <el-tooltip effect="dark" content="点击刷新" placement="top">
         <img :src="verifyCodeUrl" @click="refreshVerifyCode" />
       </el-tooltip>

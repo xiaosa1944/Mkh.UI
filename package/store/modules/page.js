@@ -12,6 +12,7 @@ const actions = {
    * @description 打开页面
    */
   open({ commit }, route) {
+    document.title = route.meta.title
     commit('setCurrent', route)
   },
 }
