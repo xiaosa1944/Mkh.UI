@@ -70,7 +70,8 @@ const start = async () => {
 }
 
 window.onload = () => {
-  start()
+  //加个延迟，防止预加载页面一闪而过
+  setTimeout(start, 1500)
 }
 
 //导出一些工具模块，方便引用

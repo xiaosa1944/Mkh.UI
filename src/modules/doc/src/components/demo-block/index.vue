@@ -80,6 +80,10 @@ export default {
       background-color: #e4e7ed;
       color: #409eff;
     }
+
+    .el-link {
+      margin: 0 5px;
+    }
   }
   .source {
     margin-bottom: 15px;
