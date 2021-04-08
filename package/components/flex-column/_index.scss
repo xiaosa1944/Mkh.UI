@@ -2,13 +2,14 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  width: 100%;
 
   &.top {
-    #{$prefix}-flex-column_top {
+    #{$prefix}-flex-top {
       flex-shrink: 0;
     }
 
-    #{$prefix}-flex-column_bottom {
+    #{$prefix}-flex-bottom {
       flex-grow: 1;
       overflow: hidden;
       box-sizing: border-box;
@@ -16,13 +17,13 @@
   }
 
   &.bottom {
-    #{$prefix}-flex-column_top {
+    #{$prefix}-flex-top {
       flex-grow: 1;
       overflow: hidden;
       box-sizing: border-box;
     }
 
-    #{$prefix}-flex-column_bottom {
+    #{$prefix}-flex-bottom {
       flex-shrink: 0;
     }
   }

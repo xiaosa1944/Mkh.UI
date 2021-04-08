@@ -1,11 +1,6 @@
 <template>
-  <section :class="['mu-flex-column', fixMode]">
-    <section class="mu-flex-column_top" :style="{ height: fixMode === 'top' ? fix : '' }">
-      <slot name="top" />
-    </section>
-    <section class="mu-flex-column_bottom" :style="{ height: fixMode === 'bottom' ? fix : '' }">
-      <slot name="bottom" />
-    </section>
+  <section :class="['mu-flex-column', mode]">
+    <slot />
   </section>
 </template>
 <script>
@@ -13,16 +8,9 @@ export default {
   name: 'Flex',
   props: {
     /**
-     * 固定高度
-     */
-    fix: {
-      type: String,
-      required: true,
-    },
-    /**
      * 固定模式，top是顶部固定，右边响应式，bottom反之
      */
-    fixMode: {
+    mode: {
       type: String,
       validator(value) {
         return ['top', 'bottom'].includes(value)

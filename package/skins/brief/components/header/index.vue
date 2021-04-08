@@ -1,6 +1,6 @@
 <template>
-  <mu-flex-row fix="50%" class="mu-header">
-    <template #left>
+  <mu-flex-row mode="right" class="mu-header">
+    <mu-flex-left>
       <ul class="mu-header_left">
         <li>
           <img class="mu-header_logo" :src="logo" />
@@ -9,8 +9,8 @@
           <span class="mu-header_title">{{ title }}</span>
         </li>
       </ul>
-    </template>
-    <template #right>
+    </mu-flex-left>
+    <mu-flex-right>
       <!--账户信息-->
       <div class="mu-header_userinfo">
         <el-dropdown trigger="click" @command="handleCommand">
@@ -38,7 +38,7 @@
         <!--全屏-->
         <mu-toolbar-fullscreen />
       </div>
-    </template>
+    </mu-flex-right>
   </mu-flex-row>
 </template>
 <script>
