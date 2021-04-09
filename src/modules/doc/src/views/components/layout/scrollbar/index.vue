@@ -1,5 +1,5 @@
 <template>
-  <mu-container scrollbar>
+  <mu-container>
     <mu-doc-component-doc title="弹性布局组件" :props="props">
       <mu-doc-demo-block title="简单用法" :meta="code1">
         <template #desc>

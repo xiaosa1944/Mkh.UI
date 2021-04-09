@@ -54,7 +54,7 @@
   </section>
 </template>
 <script>
-import useLogin from '../../composables/useLogin'
+import { useLogin } from '../../composables'
 export default {
   name: 'LoginH',
   setup() {

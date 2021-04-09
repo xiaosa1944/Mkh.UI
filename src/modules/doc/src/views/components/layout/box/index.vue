@@ -1,5 +1,5 @@
 <template>
-  <mu-container scrollbar>
+  <mu-container>
     <mu-doc-component-doc title="盒子组件(mu-box)" :props="props" :events="events" :methods="methods" :slots="slots">
       <mu-doc-demo-block title="简单盒子" :meta="code1">
         <template #desc>

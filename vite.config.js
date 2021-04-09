@@ -1,4 +1,5 @@
 const { copyFileSync } = require('fs')
+const { resolve } = require('path')
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import loadModule from './plugins/load-module'
@@ -24,5 +25,10 @@ export default defineConfig({
   ],
   server: {
     port: 6220,
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'package'),
+    },
   },
 })

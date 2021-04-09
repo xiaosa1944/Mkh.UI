@@ -34,7 +34,6 @@ export default [
     icon: 'layout',
     level: 1,
     show: true,
-    routeName: '',
     children: [
       {
         id: '3-1',
@@ -81,7 +80,6 @@ export default [
     icon: 'component',
     level: 1,
     show: true,
-    routeName: '',
     children: [
       {
         id: '4-1',
@@ -100,6 +98,25 @@ export default [
         level: 2,
         show: true,
         routeName: 'doc_base_button',
+      },
+    ],
+  },
+  {
+    id: '5',
+    name: '高级组件',
+    type: 0,
+    icon: 'component',
+    level: 1,
+    show: true,
+    children: [
+      {
+        id: '5-1',
+        name: '对话框(Dialog)',
+        type: 1,
+        icon: 'chat-o',
+        level: 2,
+        show: true,
+        routeName: 'doc_advanced_dialog',
       },
     ],
   },

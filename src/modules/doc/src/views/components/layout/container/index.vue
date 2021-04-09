@@ -1,5 +1,5 @@
 <template>
-  <mu-container scrollbar>
+  <mu-container>
     <mu-doc-component-doc title="图标组件(mu-box)" :props="props" :methods="methods">
       <mu-doc-demo-block title="简单用法">
         <template #desc>

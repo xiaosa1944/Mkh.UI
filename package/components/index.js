@@ -3,6 +3,7 @@ import Breadcrumb from './breadcrumb/index.vue'
 import Button from './button/index.vue'
 import ButtonDelete from './button-delete/index.vue'
 import Container from './container/index.vue'
+import Dialog from './dialog/index.vue'
 import FlexColumn from './flex-column/index.vue'
 import FlexRow from './flex-row/index.vue'
 import FlexLeft from './flex-left/index.vue'
@@ -25,6 +26,7 @@ const components = [
   Button,
   ButtonDelete,
   Container,
+  Dialog,
   FlexColumn,
   FlexRow,
   FlexLeft,

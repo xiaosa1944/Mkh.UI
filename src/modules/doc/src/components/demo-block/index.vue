@@ -59,7 +59,7 @@ export default {
 </script>
 <style lang="scss">
 .mu-doc-demo-block {
-  padding: 15px 15px 0 15px;
+  padding: 15px;
 
   .title {
     margin-bottom: 20px;

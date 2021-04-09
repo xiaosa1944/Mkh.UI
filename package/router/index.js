@@ -41,7 +41,7 @@ const page2route = (page, parentRoute, pages) => {
       permissions,
       breadcrumbs,
       cache,
-      noFrame,
+      noFrame: typeof noFrame === 'undefined' || noFrame === null ? false : noFrame,
       noPermissionValidate,
     },
     children: [],
@@ -78,6 +78,9 @@ const handleDefaultPage = () => {
       path: '/',
       name: 'default',
       component: () => import('../pages/default/index.vue'),
+      meta: {
+        noFrame: false,
+      },
     })
   }
 }

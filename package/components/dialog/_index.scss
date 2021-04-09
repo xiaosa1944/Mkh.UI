@@ -1,0 +1,125 @@
+#{$prefix}-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 auto;
+
+  > .el-dialog__header {
+    position: relative;
+    padding: 0;
+    flex-shrink: 0;
+    padding-left: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #eee;
+
+    #{$prefix}-dialog_icon {
+      position: absolute;
+      top: 2px;
+      left: 15px;
+
+      #{$prefix}-icon {
+        font-size: 20px;
+      }
+    }
+
+    #{$prefix}-dialog_title {
+      font-size: 18px;
+      width: 100%;
+    }
+
+    #{$prefix}-dialog_toolbar {
+      position: relative;
+
+      #{$prefix}-button {
+        padding: 0;
+        margin: 0 10px 0 0;
+        background: 0 0;
+        border: none;
+        outline: 0;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        color: #606266;
+
+        &:focus {
+          color: #606266;
+        }
+
+        &:hover {
+          color: $text-color-1;
+          transform: scale(1.2);
+        }
+
+        #{$prefix}-icon {
+          transform: scale(1) !important;
+        }
+      }
+    }
+  }
+
+  > .el-dialog__body {
+    position: relative;
+    flex-grow: 1;
+    padding: 0;
+
+    > #{$prefix}-dialog_body {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      > #{$prefix}-scrollbar {
+        > .el-scrollbar__wrap {
+          > .el-scrollbar__view {
+            padding: 10px 15px;
+          }
+        }
+      }
+    }
+  }
+
+  > .el-dialog__footer {
+    flex-shrink: 0;
+    padding: 10px;
+    border-top: 1px solid #eee;
+  }
+
+  &.no-padding {
+    > .el-dialog__body {
+      > #{$prefix}-dialog_body {
+        > #{$prefix}-scrollbar {
+          > .el-scrollbar__wrap {
+            > .el-scrollbar__view {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.is-fullscreen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-top: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+    z-index: $z-index-dialog-fullscreen;
+  }
+
+  &.draggable {
+    position: fixed;
+    margin-top: 0 !important;
+
+    > .el-dialog__header {
+      #{$prefix}-dialog_title {
+        cursor: move;
+        user-select: none;
+      }
+    }
+  }
+}

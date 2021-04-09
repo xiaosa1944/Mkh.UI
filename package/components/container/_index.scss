@@ -8,16 +8,11 @@
   border-radius: 5px;
 
   &_main {
-    padding: 5px;
     height: 100%;
 
     > #{$prefix}-scrollbar {
-      .el-scrollbar__wrap {
+      > .el-scrollbar__wrap {
         overflow-x: hidden;
-
-        .el-scrollbar__view {
-          height: 100%;
-        }
       }
 
       &.is-horizontal {

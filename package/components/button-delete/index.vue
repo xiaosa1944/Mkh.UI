@@ -19,7 +19,7 @@
 </template>
 <script>
 import { getCurrentInstance } from 'vue'
-import useLoading from '../../composables/useLoading'
+import { useLoading } from '../../composables'
 export default {
   name: 'ButtonDelete',
   props: {
@@ -83,9 +83,10 @@ export default {
   },
   emits: ['success', 'error'],
   setup(props, ctx) {
-    const { $confirm, $message } = getCurrentInstance().proxy
+    const cit = getCurrentInstance().proxy
+    const { $confirm, $message } = cit
 
-    const loading = useLoading()
+    const loading = useLoading(cit)
 
     const handleClick = () => {
       $confirm(props.msg, '删除提示', {

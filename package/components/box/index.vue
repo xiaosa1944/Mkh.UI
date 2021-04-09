@@ -50,10 +50,9 @@
   </section>
 </template>
 <script>
-import { computed, ref, toRefs } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import useCollapse from '../../composables/useCollapse'
-import useFullscreen from '../../composables/useFullscreen'
+import { useCollapse, useFullscreen } from '../../composables'
 export default {
   name: 'Box',
   props: {
@@ -156,7 +155,7 @@ export default {
     const { isFullscreen, openFullscreen, closeFullscreen, toggleFullscreen } = useFullscreen(ctx.emit)
 
     const class_ = computed(() => {
-      return ['mu-box', store.state.app.skin.fontSize, isFullscreen.value ? 'fullscreen' : '', props.height ? 'has-height' : '', props.page ? 'page' : '', props.noPadding ? 'no-padding' : '']
+      return ['mu-box', store.state.app.skin.fontSize, isFullscreen.value ? 'is-fullscreen' : '', props.height ? 'has-height' : '', props.page ? 'page' : '', props.noPadding ? 'no-padding' : '']
     })
 
     //判断是否显示滚动条

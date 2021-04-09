@@ -1,5 +1,5 @@
 <template>
-  <mu-container scrollbar>
+  <mu-container>
     <mu-doc-component-doc title="按钮组件(mu-button)" :props="props">
       <mu-doc-demo-block title="简单用法" :meta="code">
         <template #desc> 按钮组件是与Element Plaus本身的按钮组件<code>el-button</code>功能上是保持一致的，区别是图标使用框架自带的图标和用户导入的图标 </template>
