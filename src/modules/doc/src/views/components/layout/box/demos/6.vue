@@ -1,5 +1,5 @@
 <template>
-  <mu-box ref="boxRef" header title="内容自适应" icon="list" height="300px">
+  <mu-box title="内容自适应" icon="list" height="300px">
     <pre class="mu-font-size-30">
     大江东去，浪淘尽，千古风流人物。
     故垒西边，人道是，三国周郎赤壁。

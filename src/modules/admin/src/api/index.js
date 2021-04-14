@@ -60,8 +60,8 @@ const getAccountInfo = () => {
         name: 'brief',
         /** 主题 */
         theme: '',
-        /** 字号 */
-        fontSize: '',
+        /** 尺寸 */
+        size: 'small',
       },
     })
   })

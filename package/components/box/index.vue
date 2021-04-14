@@ -8,32 +8,17 @@
     :element-loading-spinner="loadingSpinner || loadingOptions.spinner"
   >
     <!--头部-->
-    <header v-if="header" class="mu-box_header">
-      <slot name="header">
-        <div v-if="icon" class="mu-box_icon">
-          <mu-icon :name="icon" :style="{ color: iconColor }" />
-        </div>
-        <!--标题-->
-        <div class="mu-box_title">
-          <slot name="title">{{ title }}</slot>
-        </div>
-        <!--工具栏前面的区域-->
-        <div class="mu-box_toolbar_before">
-          <slot name="toolbar-before" />
-        </div>
-        <!--工具栏-->
-        <div class="mu-box_toolbar">
-          <!--工具栏插槽-->
-          <slot name="toolbar" />
-          <!--刷新按钮-->
-          <mu-button v-if="toolbar.refresh" icon="refresh" @click="$emit('refresh')" />
-          <!--折叠按钮，页模式下折叠功能无效-->
-          <mu-button v-if="toolbar.collapse" :icon="isCollapse ? 'chevron-down' : 'chevron-up'" @click="toggleCollapse" />
-          <!--全屏按钮-->
-          <mu-button v-if="toolbar.fullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
-        </div>
-      </slot>
-    </header>
+    <mu-head v-if="header" class="mu-box_header" :icon="icon" :icon-color="iconColor" :size="size_">
+      <slot name="title">{{ title }}</slot>
+      <template #toolbar>
+        <!--工具栏插槽-->
+        <slot name="toolbar" />
+        <!--折叠按钮，页模式下折叠功能无效-->
+        <mu-button v-if="!showCollapse" :icon="isCollapse ? 'chevron-down' : 'chevron-up'" @click="toggleCollapse" />
+        <!--全屏按钮-->
+        <mu-button v-if="!showFullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
+      </template>
+    </mu-head>
     <el-collapse-transition>
       <section v-show="!isCollapse" class="mu-box_dialog">
         <section class="mu-box_content">
@@ -42,7 +27,7 @@
           </mu-scrollbar>
           <slot v-else />
         </section>
-        <footer v-if="footer" :class="['mu-box_footer', footerAlign]">
+        <footer v-if="$slots.footer" class="mu-box_footer">
           <slot name="footer"></slot>
         </footer>
       </section>
@@ -56,6 +41,11 @@ import { useCollapse, useFullscreen } from '../../composables'
 export default {
   name: 'Box',
   props: {
+    /** 显示头部 */
+    header: {
+      type: Boolean,
+      default: true,
+    },
     /** 标题 */
     title: {
       type: String,
@@ -71,25 +61,15 @@ export default {
       type: String,
       default: null,
     },
-    /** 显示头部 */
-    header: {
-      type: Boolean,
-      default: false,
-    },
-    /** 显示底部 */
-    footer: {
-      type: Boolean,
-      default: false,
-    },
-    /** 底部对齐方式 */
-    footerAlign: {
-      type: String,
-      default: 'right',
-    },
     /** 高度 */
     height: {
       type: String,
       default: null,
+    },
+    /** 尺寸 */
+    size: {
+      type: String,
+      default: '',
     },
     /** 是否显示水平滚动条 */
     horizontalScrollbar: {
@@ -131,36 +111,33 @@ export default {
       type: Boolean,
       default: false,
     },
-    /** 右侧工具栏 */
-    toolbar: {
-      type: Object,
-      default() {
-        return {
-          /** 刷新 */
-          refresh: false,
-          /** 折叠 */
-          collapse: false,
-          /** 全屏 */
-          fullscreen: false,
-        }
-      },
-    },
+    /** 显示折叠按钮 */
+    showCollapse: Boolean,
+    /** 显示全屏按钮 */
+    showFullscreen: Boolean,
   },
-  emits: ['refresh', 'fullscreen-change', 'collapse-change'],
+  emits: ['fullscreen-change', 'collapse-change'],
   setup(props, ctx) {
     const store = useStore()
     const scrollbarRef = ref()
     const loadingOptions = MkhUI.config.component.loading
+    const size_ = computed(() => props.size || store.state.app.account.skin.size)
 
     const { isFullscreen, openFullscreen, closeFullscreen, toggleFullscreen } = useFullscreen(ctx.emit)
 
-    const class_ = computed(() => {
-      return ['mu-box', store.state.app.skin.fontSize, isFullscreen.value ? 'is-fullscreen' : '', props.height ? 'has-height' : '', props.page ? 'page' : '', props.noPadding ? 'no-padding' : '']
-    })
-
     //判断是否显示滚动条
-    const showScrollbar = computed(() => {
-      return !props.noScrollbar.value && (props.height || props.page)
+    const showScrollbar = computed(() => !props.noScrollbar.value && (props.height || props.page))
+
+    const class_ = computed(() => {
+      return [
+        'mu-box',
+        size_,
+        isFullscreen.value ? 'is-fullscreen' : '',
+        props.height ? 'has-height' : '',
+        props.page ? 'page' : '',
+        props.noPadding ? 'no-padding' : '',
+        showScrollbar.value ? '' : 'no-scrollbar',
+      ]
     })
 
     //重置滚动条

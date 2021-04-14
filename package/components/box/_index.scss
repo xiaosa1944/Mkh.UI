@@ -10,79 +10,6 @@ $p: #{$prefix}-box;
   border-color: $border-color-1;
   box-shadow: $box-shadow;
 
-  /*头部*/
-  > #{$p}_header {
-    padding: 0 5px;
-    display: flex;
-    align-items: stretch;
-    flex-shrink: 0;
-    @include vertical-center(46px);
-    border-bottom: 1px solid $border-color-3;
-    background-color: #f8f8f8;
-
-    /*头部左侧图标*/
-    #{$p}_icon {
-      flex-shrink: 0;
-      text-align: center;
-
-      #{$prefix}-icon {
-        margin-top: 6px;
-        padding: 7px;
-        font-size: 34px;
-      }
-    }
-
-    /*标题*/
-    #{$p}_title {
-      flex-grow: 1;
-      font-size: 16px;
-      font-weight: 400;
-    }
-
-    /*工具栏前面区域*/
-    #{$p}_toolbar_before {
-      flex-grow: 1;
-    }
-
-    //工具栏
-    #{$p}_toolbar {
-      position: relative;
-      flex-shrink: 0;
-
-      #{$prefix}-button {
-        padding: 10px 7px;
-        margin-left: 0;
-        width: 30px;
-        height: 30px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        user-select: none;
-        outline: none;
-        transition: all 0.2s ease-in-out;
-        color: $text-color-3;
-        background-color: transparent;
-
-        #{$prefix}-icon {
-          transform: none;
-        }
-
-        &.is-disabled {
-          cursor: not-allowed;
-
-          span {
-            color: #c0c4cc;
-          }
-        }
-
-        &:not(.is-disabled):hover {
-          color: $text-color-1;
-          transform: scale(1.2);
-        }
-      }
-    }
-  }
-
   /**/
   > #{$p}_dialog {
     position: relative;
@@ -93,8 +20,15 @@ $p: #{$prefix}-box;
 
     > #{$p}_content {
       position: relative;
-      padding: 10px;
       flex-grow: 1;
+
+      > #{$prefix}-scrollbar {
+        > .el-scrollbar__wrap {
+          > .el-scrollbar__view {
+            padding: 10px;
+          }
+        }
+      }
     }
 
     > #{$p}_footer {
@@ -102,18 +36,6 @@ $p: #{$prefix}-box;
       flex-shrink: 0;
       border-top: 1px solid $border-color-3;
       text-align: right;
-
-      &.left {
-        text-align: left;
-      }
-
-      &.center {
-        text-align: center;
-      }
-
-      &.right {
-        text-align: right;
-      }
     }
   }
 
@@ -171,14 +93,24 @@ $p: #{$prefix}-box;
     }
   }
 
+  &.no-scrollbar {
+    > #{$prefix}-box_dialog {
+      > #{$prefix}-box_content {
+        padding: 10px !important;
+      }
+    }
+  }
+
   &.no-padding {
     > #{$prefix}-box_dialog {
       > #{$prefix}-box_content {
         padding: 0 !important;
 
-        > #{$prefix}-box_wrapper {
-          .el-scrollbar__view {
-            padding: 0 !important;
+        > #{$prefix}-scrollbar {
+          > .el-scrollbar__wrap {
+            > .el-scrollbar__view {
+              padding: 0 !important;
+            }
           }
         }
       }

@@ -1,5 +1,5 @@
 <template>
-  <mu-box header title="带工具栏的盒子" icon="box" :toolbar="{ refresh: true, collapse: true, fullscreen: true }" @refresh="handleRefresh">
+  <mu-box title="带工具栏的盒子" icon="box" show-collapse show-fullscreen>
     <template #toolbar>
       <mu-button icon="plus" @click="handlePlus" />
     </template>
@@ -23,12 +23,7 @@
 import { getCurrentInstance } from 'vue'
 export default {
   setup() {
-    const { $alert, $message } = getCurrentInstance().proxy
-    const handleRefresh = () => {
-      $alert('您点击了刷新按钮哟~', '操作提醒', {
-        confirmButtonText: '确定',
-      })
-    }
+    const { $message } = getCurrentInstance().proxy
 
     const handlePlus = () => {
       $message({
@@ -37,7 +32,6 @@ export default {
       })
     }
     return {
-      handleRefresh,
       handlePlus,
     }
   },

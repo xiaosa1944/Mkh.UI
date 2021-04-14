@@ -7,7 +7,6 @@ export default [
   { name: 'width', desc: '宽度，仅支持px或者百分比%的格式', type: 'String', values: '-', default: '50%' },
   { name: 'height', desc: '高度，仅支持px或者百分比%的格式', type: 'String', values: '-', default: '自适应' },
   { name: 'top', desc: '距离顶部的高度，仅支持px或者百分比%的格式', type: 'String', values: '-', default: '50px' },
-  { name: 'size', desc: '尺寸', type: 'String', values: 'medium / small / mini', default: '-' },
   { name: 'custom-class', desc: '自定义样式class', type: 'String', values: '-', default: '-' },
   { name: 'modal', desc: '是否显示模态框', type: 'Boolean', values: '-', default: 'true' },
   { name: 'close-on-click-modal', desc: '是否可以通过点击 modal 关闭 Dialog', type: 'Boolean', values: '-', default: 'true' },

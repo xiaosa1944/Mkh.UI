@@ -1,6 +1,6 @@
 <template>
   <mu-container>
-    <mu-doc-component-doc title="图标组件(mu-box)" :props="props" :methods="methods">
+    <mu-doc-component-doc title="容器组件(mu-container)" :props="props" :methods="methods">
       <mu-doc-demo-block title="简单用法">
         <template #desc>
           <p>容器组件是一个简单但是必要的核心页面级组件，每个页面都需要使用该组件作为根组件。</p>

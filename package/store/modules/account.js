@@ -45,13 +45,13 @@ const state = {
   /** 皮肤 */
   skin: {
     /** 名称 */
-    name: '',
+    name: '简约',
     /**编码 */
-    code: '',
+    code: 'brief',
     /** 主题 */
     theme: '',
-    /** 字号  */
-    fontSize: '',
+    /** 尺寸  */
+    size: 'small',
   },
   /**账户详细信息，用于开发者自定义扩展 */
   details: null,

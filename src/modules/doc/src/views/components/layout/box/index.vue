@@ -15,16 +15,14 @@
 
       <mu-doc-demo-block title="头部工具栏" :meta="code3">
         <template #desc>
-          <p>盒子头部的右侧是工具栏区域，并且内置了刷新、折叠、全屏三个功能，可通过<code>toolbar</code>属性进行配置，刷新功能需要用户自行监听<code>refresh</code>事件来执行刷新操作</p>
-          <p>盒子同时提供了<code>toolbar</code>插槽，该插槽位于内置功能的前面，你如果希望添加自定义的工具，可在该插槽中添加。</p>
+          <p>盒子头部的右侧是工具栏区域，并且内置了折叠、全屏两个功能按钮，同时用户也可以通过<code>toolbar</code>插槽添加自己的功能按钮</p>
         </template>
         <demo-3></demo-3>
       </mu-doc-demo-block>
 
       <mu-doc-demo-block title="底部功能栏" :meta="code4">
         <template #desc>
-          <p>盒子提供了<code>footer</code>属性来显示一个底部功能栏，同时配套提供了<code>footer</code>插槽供用户自定义。</p>
-          <p>一般情况用户都是在底部功能栏放一些按钮，默认底部功能栏里的内容是靠右对齐的，当然，您可以通过<code>footer-align</code>属性设置对齐方式，如居中<code>center</code>、居左<code>left</code></p>
+          <p>盒子提供了提供了<code>footer</code>插槽供用户在底部添加自定义内容。</p>
         </template>
         <demo-4></demo-4>
       </mu-doc-demo-block>

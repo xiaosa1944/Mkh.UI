@@ -2,7 +2,7 @@
   <mu-button
     class="mu-button-delete"
     :type="type"
-    :size="size"
+    :size="size_"
     :plain="plain"
     :round="round"
     :circle="circle"
@@ -20,6 +20,7 @@
 <script>
 import { getCurrentInstance } from 'vue'
 import { useLoading } from '../../composables'
+import { useStore } from 'vuex'
 export default {
   name: 'ButtonDelete',
   props: {
@@ -85,6 +86,8 @@ export default {
   setup(props, ctx) {
     const cit = getCurrentInstance().proxy
     const { $confirm, $message } = cit
+    const store = useStore()
+    const size_ = computed(() => props.size || store.state.app.account.skin.size)
 
     const loading = useLoading(cit)
 
@@ -116,6 +119,7 @@ export default {
     }
 
     return {
+      size_,
       handleClick,
     }
   },

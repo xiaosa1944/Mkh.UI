@@ -19,26 +19,17 @@
   >
     <!--头部-->
     <template v-if="header" #title>
-      <mu-flex-row mode="right">
-        <mu-flex-left>
-          <div v-if="icon" class="mu-dialog_icon">
-            <mu-icon :name="icon" :style="{ color: iconColor || '' }" />
-          </div>
-          <div class="mu-dialog_title">
-            <slot name="title">{{ title }}</slot>
-          </div>
-        </mu-flex-left>
-        <mu-flex-right>
-          <section class="mu-dialog_toolbar">
-            <!--工具栏插槽-->
-            <slot name="toolbar" />
-            <!--全屏按钮-->
-            <mu-button v-if="showFullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
-            <!--关闭按钮-->
-            <mu-button v-if="showClose" icon="close" @click="close" />
-          </section>
-        </mu-flex-right>
-      </mu-flex-row>
+      <mu-head class="mu-dialog_header" :icon="icon" :icon-color="iconColor" :size="size">
+        <slot name="title">{{ title }}</slot>
+        <template #toolbar>
+          <!--工具栏插槽-->
+          <slot name="toolbar" />
+          <!--全屏按钮-->
+          <mu-button v-if="showFullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
+          <!--关闭按钮-->
+          <mu-button v-if="showClose" icon="close" @click="close" />
+        </template>
+      </mu-head>
     </template>
     <!--内容-->
     <section class="mu-dialog_body">
@@ -56,6 +47,7 @@
 import { computed, ref } from 'vue'
 import { useVisible, useFullscreen } from '../../composables'
 import { on, off } from '@/utils/dom'
+import { useStore } from 'vuex'
 export default {
   name: 'Dialog',
   props: {
@@ -95,6 +87,11 @@ export default {
       type: String,
       default: '50px',
     },
+    /** 尺寸 */
+    size: {
+      type: String,
+      default: '',
+    },
     /** 自定义类名 */
     customClass: {
       type: String,
@@ -114,7 +111,8 @@ export default {
     showClose: {
       type: Boolean,
       default: true,
-    } /** 显示全屏按钮 */,
+    },
+    /** 显示全屏按钮 */
     showFullscreen: {
       type: Boolean,
       default: true,
@@ -153,6 +151,9 @@ export default {
   },
   emits: ['update:modelValue', 'open', 'opened', 'close', 'closed'],
   setup(props, ctx) {
+    const store = useStore()
+    const size_ = computed(() => props.size || store.state.app.account.skin.size)
+
     //全屏操作
     const { isFullscreen, openFullscreen, closeFullscreen, toggleFullscreen } = useFullscreen(ctx.emit)
 
@@ -160,6 +161,7 @@ export default {
     const class_ = computed(() => {
       const { customClass, noPadding, draggable } = props
       let classList = ['mu-dialog', `mu-dialog-${new Date().getTime()}`]
+      if (size_.value) classList.push(size_)
       if (customClass) classList.push(props.customClass)
       if (noPadding) classList.push('no-padding')
       if (isFullscreen.value) classList.push('is-fullscreen')
@@ -271,6 +273,7 @@ export default {
     }
 
     return {
+      size_,
       class_,
       visible,
       open,

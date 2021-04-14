@@ -8,55 +8,6 @@
     position: relative;
     padding: 0;
     flex-shrink: 0;
-    padding-left: 50px;
-    height: 50px;
-    line-height: 50px;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #eee;
-
-    #{$prefix}-dialog_icon {
-      position: absolute;
-      top: 2px;
-      left: 15px;
-
-      #{$prefix}-icon {
-        font-size: 20px;
-      }
-    }
-
-    #{$prefix}-dialog_title {
-      font-size: 18px;
-      width: 100%;
-    }
-
-    #{$prefix}-dialog_toolbar {
-      position: relative;
-
-      #{$prefix}-button {
-        padding: 0;
-        margin: 0 10px 0 0;
-        background: 0 0;
-        border: none;
-        outline: 0;
-        cursor: pointer;
-        font-size: 18px;
-        transition: all 0.3s ease;
-        color: #606266;
-
-        &:focus {
-          color: #606266;
-        }
-
-        &:hover {
-          color: $text-color-1;
-          transform: scale(1.2);
-        }
-
-        #{$prefix}-icon {
-          transform: scale(1) !important;
-        }
-      }
-    }
   }
 
   > .el-dialog__body {
@@ -84,7 +35,7 @@
   > .el-dialog__footer {
     flex-shrink: 0;
     padding: 10px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid $border-color-3;
   }
 
   &.no-padding {
@@ -116,7 +67,7 @@
     margin-top: 0 !important;
 
     > .el-dialog__header {
-      #{$prefix}-dialog_title {
+      #{$prefix}-head_title {
         cursor: move;
         user-select: none;
       }

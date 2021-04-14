@@ -2,7 +2,7 @@
   <el-button
     class="mu-button"
     :type="type"
-    :size="size || fontSize"
+    :size="size_"
     :plain="plain"
     :round="round"
     :circle="circle"
@@ -27,7 +27,7 @@ import { useStore } from 'vuex'
 export default {
   name: 'Button',
   props: {
-    /** 尺寸，默认按照框架的字号设置 */
+    /** 尺寸 */
     size: {
       type: String,
       default: null,
@@ -80,19 +80,18 @@ export default {
     const router = useRouter()
     const store = useStore()
 
-    //默认字号
-    const fontSize = computed(() => store.state.app.account.skin.fontSize)
+    const size_ = computed(() => props.size || store.state.app.account.skin.size)
 
-    const handleClick = () => {
+    const handleClick = event => {
       if (props.to) {
         router.push(props.to)
       } else {
-        ctx.emit('click')
+        ctx.emit('click', event)
       }
     }
 
     return {
-      fontSize,
+      size_,
       handleClick,
     }
   },
