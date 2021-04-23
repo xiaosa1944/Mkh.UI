@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { store } from '../store'
 import NProgress from 'nprogress'
 import routes from './routes'
+import defaultPage from '../pages/default/index.vue'
 
 // 进度条初始值
 NProgress.configure({ minimum: 0.2 })
@@ -73,15 +74,9 @@ const handleDefaultPage = () => {
     }
   }
 
+  //如果未设置默认页，则使用系统自带的默认页并将path设置为'/'
   if (noDefaultPage) {
-    routes.push({
-      path: '/',
-      name: 'default',
-      component: () => import('../pages/default/index.vue'),
-      meta: {
-        noFrame: false,
-      },
-    })
+    routes[0].path = '/'
   }
 }
 

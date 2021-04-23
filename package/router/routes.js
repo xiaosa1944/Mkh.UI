@@ -1,9 +1,23 @@
+import defaultPage from '../pages/default/index.vue'
+import Login from '../pages/login/index.vue'
+import Error403 from '../pages/403/index.vue'
+import Error404 from '../pages/404/index.vue'
+import Error500 from '../pages/500/index.vue'
+
 export default [
+  {
+    path: '/default',
+    name: 'default',
+    component: defaultPage,
+    meta: {
+      noFrame: false,
+    },
+  },
   {
     // 登录页
     path: '/login',
     name: 'login',
-    component: () => import('../pages/login/index.vue'),
+    component: Login,
     meta: {
       title: '登录',
       cache: false,
@@ -15,7 +29,7 @@ export default [
     // 403
     path: '/error/403',
     name: 'error403',
-    component: () => import('../pages/403/index.vue'),
+    component: Error403,
     meta: {
       title: 'Error 403',
       cache: false,
@@ -27,7 +41,7 @@ export default [
     // 404
     path: '/error/404',
     name: 'error404',
-    component: () => import('../pages/404/index.vue'),
+    component: Error404,
     meta: {
       title: 'Error 404',
       cache: false,
@@ -39,7 +53,7 @@ export default [
     // 404
     path: '/error/500',
     name: 'error500',
-    component: () => import('../pages/500/index.vue'),
+    component: Error500,
     meta: {
       title: 'Error 500',
       cache: false,

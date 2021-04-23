@@ -43,14 +43,6 @@ window.MkhUI = {
       getAccountInfo: null,
     },
   },
-  /**创建模块 */
-  createModule: function (pkg) {
-    return {
-      id: pkg.id,
-      code: pkg.name.replace('@mkh/mod-', ''),
-      description: pkg.description,
-    }
-  },
   /**注册模块 */
   useModule: function (module) {
     this.modules.push(module)

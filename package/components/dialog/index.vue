@@ -46,7 +46,7 @@
 <script>
 import { computed, ref } from 'vue'
 import { useVisible, useFullscreen } from '../../composables'
-import { on, off } from '@/utils/dom'
+import { on, off } from '../../utils/dom'
 import { useStore } from 'vuex'
 export default {
   name: 'Dialog',

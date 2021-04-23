@@ -4,7 +4,6 @@ import store from './store'
 const options = {
   name: '简约',
   code: 'brief',
-  preview: () => import('./preview.png'),
   store,
   component,
   themes: [

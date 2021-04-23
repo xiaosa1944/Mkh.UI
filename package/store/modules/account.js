@@ -78,7 +78,6 @@ const actions = {
 const mutations = {
   init(state, info) {
     Object.assign(state, info)
-    state.avatar = info.avatar || './images/avatar.png'
   },
   clear(state) {
     state.id = ''

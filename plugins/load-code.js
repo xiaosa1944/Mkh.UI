@@ -28,7 +28,7 @@ export default function () {
         let filePath = id.replace(suffix, '')
         if (filePath.startsWith('/')) {
           //开发环境下，文件路径是url形式的，所以需要转换一下
-          filePath = normalizePath(__dirname + filePath)
+          filePath = normalizePath(__dirname.replace('plugins', '') + filePath)
         }
 
         //先将后缀名修改为vue在读取文件内容

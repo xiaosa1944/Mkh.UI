@@ -1,4 +1,5 @@
 <template>
+  <p>{{ $t('mkh.name') }}</p>
   <!--不在框架中显示-->
   <router-view v-if="noFrame" />
   <!--框架内显示-->
@@ -8,6 +9,7 @@
 import { computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
+
 export default {
   setup() {
     const store = useStore()

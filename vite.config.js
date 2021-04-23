@@ -1,34 +1,43 @@
-const { copyFileSync } = require('fs')
 const { resolve } = require('path')
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import loadModule from './plugins/load-module'
+import mkh from './plugins/plugin-mkh'
 import loadCode from './plugins/load-code'
-import htmlTransform from './plugins/html-transform'
-
-//复制入口文件index.html，用户可通过这种方式来使用自己的index.html
-copyFileSync('./entries/index.html', './index.html')
 
 export default defineConfig({
   plugins: [
-    htmlTransform({
-      render: {
-        /** 版权信息 */
-        copyright: '版权所有：OLDLI',
-        /** Logo */
-        logo: './images/logo.png',
+    mkh({
+      /** index.html文件转换 */
+      htmlTransform: {
+        /** 自定义index.html文件，使用完整路径，不指定使用默认的，也就是根目录的index.html文件 */
+        custom: resolve(__dirname, './entries/index.html'),
+        /** 模板渲染数据，如果使用自己的模板，则自己定义渲染数据 */
+        render: {
+          /** 版权信息 */
+          copyright: '版权所有：OLDLI',
+          /** Logo */
+          logo: './logo.png',
+        },
+        /** 压缩配置 */
+        htmlMinify: {},
       },
     }),
-    loadModule(),
     loadCode(),
     vue(),
   ],
   server: {
     port: 6220,
   },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'package'),
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'package/index.js'),
+      formats: ['es'],
+      fileName: 'index',
+    },
+    outDir: 'lib',
+    rollupOptions: {
+      /** 排除无需打包进去的依赖库 */
+      external: ['vue', 'vue-router', 'vuex', 'element-plus', 'lodash', 'sortablejs', 'vue-i18n'],
     },
   },
 })

@@ -65,6 +65,15 @@
       line-height: 32px;
     }
   }
+
+  &.is-fullscreen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: $z-index-list-fullscreen;
+  }
 }
 $p: #{$prefix}-list_setcolumn;
 #{$p}_popper {

@@ -149,6 +149,7 @@ export default {
 
     return {
       ...useCollapse(ctx.emit),
+      size_,
       class_,
       scrollbarRef,
       loadingOptions,

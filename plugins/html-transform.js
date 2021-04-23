@@ -1,13 +1,17 @@
+const fs = require('fs')
 import ejs from 'ejs'
 import { minify } from 'html-minifier-terser'
 
 //html渲染，基于 https://ejs.bootcss.com/
-const htmlRender = function (options) {
+const htmlRender = function (options, custom) {
   return {
     name: 'html-render',
     transformIndexHtml: {
       enforce: 'pre',
       transform(html) {
+        if (custom) {
+          html = fs.readFileSync(custom, 'utf8')
+        }
         return ejs.render(html, options)
       },
     },
@@ -40,5 +44,5 @@ const htmlMinify = function (options) {
 
 /** index.html处理 */
 export default function (options) {
-  return [htmlRender(options.render), htmlMinify(options.minify)]
+  return [htmlRender(options.render, options.custom), htmlMinify(options.minify)]
 }

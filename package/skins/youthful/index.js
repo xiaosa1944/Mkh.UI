@@ -3,7 +3,6 @@ import component from './index.vue'
 const options = {
   name: '青春',
   code: 'youthful',
-  preview: () => import('./preview.png'),
   component,
   themes: [
     {
