@@ -1,6 +1,6 @@
 const fs = require('fs')
 import ejs from 'ejs'
-import { minify } from 'html-minifier-terser'
+import minifierTerser from 'html-minifier-terser'
 
 //html渲染，基于 https://ejs.bootcss.com/
 const htmlRender = function (options, custom) {
@@ -36,7 +36,7 @@ const htmlMinify = function (options) {
           removeEmptyAttributes: true,
         }
 
-        return minify(html, Object.assign({}, defaultMinifyOptions, options || {}))
+        return minifierTerser.minify(html, Object.assign({}, defaultMinifyOptions, options || {}))
       },
     },
   }

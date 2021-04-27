@@ -67,12 +67,12 @@ $skin-brief-breadcrumb-height: 50px;
         display: inline-block;
         margin: 0 10px;
         height: 100%;
-        color: #ddd;
 
         #{$prefix}-icon {
           margin-top: ($skin-brief-header-height - $skin-brief-toolbar-icon-font-size) /2;
           font-size: $skin-brief-toolbar-icon-font-size;
           cursor: pointer;
+          color: #ddd;
         }
 
         &:hover {

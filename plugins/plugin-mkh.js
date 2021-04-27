@@ -1,6 +1,6 @@
-import htmlTransform from './html-transform'
-import loadModule from './load-module'
-import loadLocale from './load-locale'
+import htmlTransform from './html-transform.js'
+import loadModule from './load-module.js'
+import loadLocale from './load-locale.js'
 
 export default function (options) {
   //模块列表

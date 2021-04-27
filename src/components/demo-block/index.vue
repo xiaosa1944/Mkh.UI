@@ -100,6 +100,7 @@ export default {
 
   .control {
     height: 44px;
+    line-height: 44px;
     box-sizing: border-box;
     border-radius: 5px;
     text-align: center;

@@ -16,7 +16,7 @@
 </template>
 <script>
 import { getCurrentInstance, ref } from 'vue'
-import { useLoading } from '../../../../../../../../../package/composables'
+import { useLoading } from '@/package/composables'
 export default {
   setup() {
     const cti = getCurrentInstance().proxy

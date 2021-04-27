@@ -40,4 +40,9 @@ export default defineConfig({
       external: ['vue', 'vue-router', 'vuex', 'element-plus', 'lodash', 'sortablejs', 'vue-i18n'],
     },
   },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname),
+    },
+  },
 })

@@ -18,7 +18,7 @@
   </mu-button>
 </template>
 <script>
-import { getCurrentInstance } from 'vue'
+import { computed, getCurrentInstance } from 'vue'
 import { useLoading } from '../../composables'
 import { useStore } from 'vuex'
 export default {

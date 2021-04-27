@@ -20,6 +20,7 @@ import LoginM from './login-m/index.vue'
 import Menu from './menu/index.vue'
 import Scrollbar from './scrollbar/index.vue'
 import ToolbarFullscreen from './toolbar-fullscreen/index.vue'
+import ToolbarLang from './toolbar-lang/index.vue'
 import ToolbarSkin from './toolbar-skin/index.vue'
 import VerifycodeInput from './verifycode-input/index.vue'
 
@@ -46,6 +47,7 @@ const components = [
   Menu,
   Scrollbar,
   ToolbarFullscreen,
+  ToolbarLang,
   ToolbarSkin,
   VerifycodeInput,
 ]

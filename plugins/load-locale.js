@@ -1,7 +1,6 @@
-import { normalizePath } from 'vite'
-
 const fs = require('fs')
 const path = require('path')
+import { normalizePath } from 'vite'
 
 export default function (modules) {
   const filter = '@mkh-locale'
@@ -22,10 +21,10 @@ export default function (modules) {
         const lang = id.split('/')[1]
 
         /** 导入Element Plus的语言包 */
-        code += `import el from 'element-plus/lib/locale/lang/${lang}'\r\n`
+        code += `import el from 'element-plus/lib/locale/lang/${lang}.js'\r\n`
 
         /** 导入Mkh.UI中的语言包 */
-        code += `import mkh from '../package/locale/lang/${lang}'\r\n`
+        code += `import mkh from '${normalizePath(path.resolve(__dirname, `../lang/${lang}.js`))}'\r\n`
 
         /** 导入模块中的语言包 */
         let mods = []
@@ -38,6 +37,7 @@ export default function (modules) {
         }
 
         code += `export default { el:el.el, mkh, mod: {${mods.join(',')}}}`
+
         return code
       }
 

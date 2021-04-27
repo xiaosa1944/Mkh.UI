@@ -5,12 +5,14 @@ import pkg from '../package.json'
  * 解析出来的一些固定数据，理论上系统启动后，该对象不会再被更改
  */
 window.MkhUI = {
-  /**版本号 */
+  /** 版本号 */
   version: pkg.version,
-  /**模块列表 */
+  /** 模块列表 */
   modules: [],
-  /**皮肤列表 */
+  /** 皮肤列表 */
   skins: [],
+  /** 语言集 */
+  locales: [],
   /**配置信息 */
   config: {
     /**站点信息 */
@@ -43,11 +45,11 @@ window.MkhUI = {
       getAccountInfo: null,
     },
   },
-  /**注册模块 */
+  /** 注册模块 */
   useModule: function (module) {
     this.modules.push(module)
   },
-  /**注册皮肤 */
+  /** 注册皮肤 */
   useSkin: function (skin) {
     this.skins.push(skin)
   },

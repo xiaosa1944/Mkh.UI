@@ -1,5 +1,4 @@
 <template>
-  <p>{{ $t('mkh.name') }}</p>
   <!--不在框架中显示-->
   <router-view v-if="noFrame" />
   <!--框架内显示-->

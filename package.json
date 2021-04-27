@@ -1,15 +1,17 @@
 {
+  "id": 0,
   "name": "@mkh/ui",
-  "version": "0.0.12",
+  "version": "0.0.15",
   "description": "17MKH前端框架",
   "author": "OLDLI",
-  "main": "lib/index.es.js",
+  "main": "package/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run build:plugins",
+    "serve": "vite preview",
+    "build": "vite build && npm run build:locale && npm run build:plugins",
     "build:lib": "vite build",
-    "build:plugins": "rollup ./plugins/plugin-mkh.js --file ./lib/plugins/index.js --format cjs",
-    "serve": "vite preview"
+    "build:locale": "rollup -c ./build/locale.config.js",
+    "build:plugins": "rollup ./plugins/plugin-mkh.js --file ./lib/plugins/index.js --format cjs"
   },
   "dependencies": {
     "clipboard-copy": "^4.0.1",
@@ -36,6 +38,8 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.7.0",
     "html-minifier-terser": "^5.1.1",
+    "rimraf": "^3.0.2",
+    "rollup-plugin-multi-input": "^1.2.0",
     "sass": "^1.32.8",
     "vite": "^2.0.5"
   },
@@ -44,7 +48,6 @@
   },
   "files": [
     "entries",
-    "lib",
-    "plugins"
+    "lib"
   ]
 }

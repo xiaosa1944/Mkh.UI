@@ -7,17 +7,19 @@ export default function (modules) {
 
   //加载路由页面信息
   const loadPages = (dir, pages) => {
-    const files = fs.readdirSync(dir)
+    if (fs.existsSync(dir)) {
+      const files = fs.readdirSync(dir)
 
-    files.forEach(file => {
-      const subDir = path.join(dir, file)
-      var stat = fs.statSync(subDir)
-      if (stat.isDirectory()) {
-        loadPages(subDir, pages)
-      } else if (file === 'page.js') {
-        pages.push(normalizePath(subDir))
-      }
-    })
+      files.forEach(file => {
+        const subDir = path.join(dir, file)
+        var stat = fs.statSync(subDir)
+        if (stat.isDirectory()) {
+          loadPages(subDir, pages)
+        } else if (file === 'page.js') {
+          pages.push(normalizePath(subDir))
+        }
+      })
+    }
   }
 
   //加载模块全局组件信息
@@ -55,43 +57,67 @@ export default function (modules) {
     },
     load(id) {
       if (id.startsWith(prefix)) {
-        let src = ''
+        let src = '' //导入代码
+        let exportCode = '' //导出代码
         const code = id.replace(prefix, '')
         const dir = modules[code]
 
+        /** 加载package.json */
+        const packageFile = normalizePath(path.resolve(dir, '../package.json'))
+        const hasPackageFile = fs.existsSync(packageFile)
+        if (hasPackageFile) {
+          src += `import { id, version, description } from '${packageFile}'\r\n`
+          exportCode += `id:id || 0, code:'${code}', version, description`
+        }
+
         /** 加载接口服务api */
-        const apiDir = path.resolve(dir, 'api/index.js')
+        const apiDir = normalizePath(path.resolve(dir, 'api/index.js'))
         if (fs.existsSync(apiDir)) {
-          src += `import api from '${normalizePath(apiDir)}'\r\n`
+          src += `import api from '${apiDir}'\r\n`
+          exportCode += ',api'
         }
 
         /** 加载状态 */
-        const storeDir = path.resolve(dir, 'store/index.js')
+        const storeDir = normalizePath(path.resolve(dir, 'store/index.js'))
         if (fs.existsSync(storeDir)) {
-          src += `import store from '${normalizePath(storeDir)}'\r\n`
+          src += `import store from '${storeDir}'\r\n`
+          exportCode += ',store'
         }
 
         /** 加载模块路由页面 */
         const pages = []
-        loadPages(path.resolve(dir, 'views'), pages)
-        src += 'const pages = []\r\n'
+        const pagesDir = normalizePath(path.resolve(dir, 'views'))
+        loadPages(pagesDir, pages)
         pages.forEach((p, i) => {
           const name = `page_${i}`
           src += `import ${name} from '${p}'\r\n`
-          src += `pages.push(${name})\r\n`
         })
 
         /** 加载模块全局组件 */
         const components = []
-        loadComponents(path.resolve(dir, 'components'), components)
-        src += 'const components = []\r\n'
+        const componentsDir = normalizePath(path.resolve(dir, 'components'))
+        loadComponents(componentsDir, components)
         components.forEach((c, i) => {
           const name = `component_${i}`
           src += `import ${name} from '${c.path}'\r\n`
+        })
+
+        src += 'const pages = []\r\n'
+        src += 'const components = []\r\n'
+        pages.forEach((p, i) => {
+          const name = `page_${i}`
+          src += `pages.push(${name})\r\n`
+        })
+        components.forEach((c, i) => {
+          const name = `component_${i}`
           src += `components.push({name:\'${c.name}\',component:${name}})\r\n`
         })
 
-        src += `export default { api, store, pages, components }`
+        src += `const mod = {${exportCode}, pages, components }\r\n`
+        //注册模块
+        src += 'MkhUI.useModule(mod);\r\n'
+        //导出模块
+        src += 'export default mod'
         return src
       }
 

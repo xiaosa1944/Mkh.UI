@@ -3,12 +3,6 @@ import mod from '@mkh-module-doc'
 import VCharts from 'vue-echarts'
 import * as echarts from 'echarts'
 
-/** 对于生产代码，模块的编号、编码、版本号、描述说明信息应该从模块的package.json文件中读取 */
-mod.id = 0
-mod.code = 'doc'
-mod.version = '0.0.2'
-mod.description = '17MKH文档模块'
-
 /** 模块注册回调函数，当vue根实例挂载前调用 */
 mod.callback = ({ app }) => {
   /* 注册vue-echarts组件 */
