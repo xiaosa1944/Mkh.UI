@@ -27,6 +27,7 @@ function pagination(index, size, array) {
 }
 
 export const query = ({ name, author, dynasty, type, page }) => {
+  console.log(page)
   return new Promise(resolve => {
     let rows = [...data]
     if (name) {

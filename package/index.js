@@ -5,8 +5,6 @@ import Layout from './layout.vue'
 import MkhRouter, { router } from './router'
 import MkhStore, { store } from './store'
 import _ from 'lodash'
-/** 默认导入中文语言包 */
-import zhCN from '@mkh-locale/zh-cn'
 /** 导入ElementPlus */
 import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
@@ -26,9 +24,7 @@ let finalOptions = {
     /** 备用语言 */
     fallback: 'zh-cn',
     /** 语言集 */
-    messages: {
-      'zh-cn': zhCN,
-    },
+    messages: [],
   },
 }
 

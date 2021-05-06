@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: stretch;
   border: 1px solid $border-color-1;
+  background-color: #fff;
 
   &_querybar {
     flex-shrink: 0;
@@ -56,16 +57,27 @@
     padding-top: 4px;
   }
 
-  &_setcolumn {
-    .el-button {
-      margin: 4px 7px;
-      padding: 0 15px;
-      height: 32px;
-      min-height: 32px;
-      line-height: 32px;
-    }
+  &_setcolumn_btn {
+    margin: 4px 7px;
+    padding: 0 15px;
+    height: 32px;
+    min-height: 32px;
+    line-height: 32px;
   }
 
+  &_setcolumn_table {
+    .el-input__inner {
+      text-align: center;
+    }
+
+    .el-table__row {
+      cursor: move;
+    }
+
+    &_dragging {
+      background-color: #8cc5ff !important;
+    }
+  }
   &.is-fullscreen {
     position: fixed;
     left: 0;
@@ -73,25 +85,5 @@
     height: 100%;
     width: 100%;
     z-index: $z-index-list-fullscreen;
-  }
-}
-$p: #{$prefix}-list_setcolumn;
-#{$p}_popper {
-  #{$p}_item {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    height: 30px;
-    line-height: 30px;
-  }
-
-  #{$p}_handle {
-    flex-shrink: 0;
-    width: 30px;
-    cursor: pointer;
-    text-align: center;
-  }
-  #{$p}_checkbox {
-    flex-grow: 1;
   }
 }

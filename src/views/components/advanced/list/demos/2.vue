@@ -1,6 +1,6 @@
 <template>
   <div style="height: 400px">
-    <mu-list title="诗词列表" :cols="cols" :query-model="model" :query-method="query">
+    <mu-list title="诗词列表" :cols="cols" :query-model="model" :query-method="query" :delete-method="deleteMethod" show-delete-btn multiple>
       <template #querybar>
         <el-form-item label="名称：" prop="name">
           <el-input v-model="model.name" clearable></el-input>
@@ -18,14 +18,18 @@
           </el-select>
         </el-form-item>
       </template>
+      <template #querybar-buttons>
+        <mu-button type="success" icon="plus" text="自定义按钮" @click="handleCustomButton" />
+      </template>
     </mu-list>
   </div>
 </template>
 <script>
-import { reactive, ref } from 'vue'
+import { getCurrentInstance, reactive, ref } from 'vue'
 import { query } from './api'
 export default {
   setup() {
+    const { $alert } = getCurrentInstance().proxy
     const model = reactive({ name: '', author: '', dynasty: '' })
     const cols = ref([
       { prop: 'id', label: '编号', width: '55', show: false },
@@ -38,10 +42,24 @@ export default {
       { prop: 'type', label: '类型' },
     ])
 
+    const deleteMethod = ids => {
+      return new Promise(resolve => {
+        resolve()
+      })
+    }
+
+    const handleCustomButton = () => {
+      $alert('您点击了自定义按钮~', '提示', {
+        confirmButtonText: '确定',
+      })
+    }
+
     return {
       model,
       cols,
       query,
+      deleteMethod,
+      handleCustomButton,
     }
   },
 }

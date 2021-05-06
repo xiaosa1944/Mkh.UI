@@ -11,8 +11,11 @@ import FlexLeft from './flex-left/index.vue'
 import FlexRight from './flex-right/index.vue'
 import FlexTop from './flex-top/index.vue'
 import FlexBottom from './flex-bottom/index.vue'
+import Form from './form/index.vue'
+import FormDialog from './form-dialog/index.vue'
 import Head from './head/index.vue'
 import Icon from './icon/index.vue'
+import IconPicker from './icon-picker/index.vue'
 import List from './list/index.vue'
 import LoginH from './login-h/index.vue'
 import LoginK from './login-k/index.vue'
@@ -38,8 +41,11 @@ const components = [
   FlexRight,
   FlexTop,
   FlexBottom,
+  Form,
+  FormDialog,
   Head,
   Icon,
+  IconPicker,
   List,
   LoginH,
   LoginK,

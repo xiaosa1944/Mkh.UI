@@ -31,7 +31,6 @@ export default {
         onSort(evt) {
           var newList = [...props.modelValue]
           newList.splice(evt.newIndex, 0, newList.splice(evt.oldIndex, 1)[0])
-          console.log(newList)
           ctx.emit('update:modelValue', newList)
         },
       })
@@ -39,6 +38,7 @@ export default {
 
     return {
       containerRef,
+      sortable,
     }
   },
 }

@@ -3,7 +3,7 @@
     v-loading="loading"
     :class="class_"
     :style="{ height }"
-    :element-loading-text="loadingText || loadingOptions.text"
+    :element-loading-text="loadingText || $t('mkh.dialog.loadingText')"
     :element-loading-background="loadingBackground || loadingOptions.background"
     :element-loading-spinner="loadingSpinner || loadingOptions.spinner"
   >
@@ -38,84 +38,10 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useCollapse, useFullscreen } from '../../composables'
+import props from './props'
 export default {
   name: 'Box',
-  props: {
-    /** 显示头部 */
-    header: {
-      type: Boolean,
-      default: true,
-    },
-    /** 标题 */
-    title: {
-      type: String,
-      default: null,
-    },
-    /** 图标 */
-    icon: {
-      type: String,
-      default: null,
-    },
-    /** 图标颜色 */
-    iconColor: {
-      type: String,
-      default: null,
-    },
-    /** 高度 */
-    height: {
-      type: String,
-      default: null,
-    },
-    /** 尺寸 */
-    size: {
-      type: String,
-      default: '',
-    },
-    /** 是否显示水平滚动条 */
-    horizontalScrollbar: {
-      type: Boolean,
-      default: false,
-    },
-    /** 显示加载动画 */
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-    /** 加载动画文本 */
-    loadingText: {
-      type: String,
-      default: null,
-    },
-    /** 加载动画背景色 */
-    loadingBackground: {
-      type: String,
-      default: null,
-    },
-    /** 加载动画图标 */
-    loadingSpinner: {
-      type: String,
-      default: null,
-    },
-    /** 是否页模式 */
-    page: {
-      type: Boolean,
-      default: false,
-    },
-    /** 不显示滚动条 */
-    noScrollbar: {
-      type: Boolean,
-      default: false,
-    },
-    /** 没有内边距 */
-    noPadding: {
-      type: Boolean,
-      default: false,
-    },
-    /** 显示折叠按钮 */
-    showCollapse: Boolean,
-    /** 显示全屏按钮 */
-    showFullscreen: Boolean,
-  },
+  props,
   emits: ['fullscreen-change', 'collapse-change'],
   setup(props, ctx) {
     const store = useStore()

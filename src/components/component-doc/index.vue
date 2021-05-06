@@ -1,6 +1,7 @@
 <template>
-  <div class="mu-doc-component">
+  <div :class="['mu-doc-component', isFullscreen ? 'is-fullscreen' : '']">
     <h1 class="mu-doc-component_title">{{ title }}</h1>
+    <mu-button class="mu-doc-component_fullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
     <el-tabs class="mu-doc-component_tabs" type="border-card">
       <el-tab-pane label="组件示例(Demo)">
         <mu-scrollbar>
@@ -34,12 +35,14 @@
         <el-table class="mu-doc-component_table" height="100%" :data="slots" border>
           <el-table-column prop="name" label="插槽"></el-table-column>
           <el-table-column prop="desc" label="说明"></el-table-column>
+          <el-table-column prop="params" label="参数"></el-table-column>
         </el-table>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script>
+import { useFullscreen } from '../../../package/composables'
 export default {
   props: {
     title: {
@@ -62,6 +65,13 @@ export default {
       type: Array,
       default: null,
     },
+  },
+  setup(props, ctx) {
+    const { isFullscreen, toggleFullscreen } = useFullscreen(ctx.emit)
+    return {
+      isFullscreen,
+      toggleFullscreen,
+    }
   },
 }
 </script>
@@ -103,6 +113,50 @@ export default {
     height: 100%;
     width: 100%;
     border: none;
+  }
+
+  &_fullscreen {
+    position: absolute;
+    right: 0;
+    top: 65px;
+    padding: 0;
+    margin: 0 10px 0 0;
+    background: 0 0;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #606266;
+    z-index: 1001;
+
+    &:focus {
+      color: #606266;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    .mu-icon {
+      transform: scale(1) !important;
+    }
+  }
+
+  &.is-fullscreen {
+    .mu-doc-component_fullscreen {
+      position: fixed;
+      right: 5px;
+      top: 5px;
+    }
+
+    .el-tabs {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1000;
+    }
   }
 }
 </style>

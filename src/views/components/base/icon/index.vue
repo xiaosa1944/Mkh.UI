@@ -8,6 +8,13 @@
         </template>
       </mu-doc-demo-block>
 
+      <mu-doc-demo-block title="图标选择器" :meta="code">
+        <template #desc>
+          <p>以下显示了所有图标，点击图标即可快速复制代码</p>
+          <demo />
+        </template>
+      </mu-doc-demo-block>
+
       <mu-doc-demo-block title="图标预览">
         <template #desc>
           <p>以下显示了所有图标，点击图标即可快速复制代码</p>
@@ -26,7 +33,10 @@
 import { getCurrentInstance, ref } from 'vue'
 import props from './_props'
 import copy from 'clipboard-copy'
+import demo from './demos/1.vue'
+import code from '!./demos/1.vue'
 export default {
+  components: { demo },
   setup() {
     const { $message } = getCurrentInstance().proxy
     const list = ref([])
@@ -50,6 +60,7 @@ export default {
       props,
       list,
       handleCopy,
+      code,
     }
   },
 }

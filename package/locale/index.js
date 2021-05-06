@@ -4,16 +4,15 @@ let i18n
 
 export default (app, options) => {
   const messages = {}
-  Object.keys(options.messages).forEach(key => {
-    const { el, mkh, mod } = options.messages[key]
-
+  options.messages.forEach(locale => {
+    const { el, mkh, mod } = locale
     //将语言集保存下载
     MkhUI.locales.push({
       label: mkh.name,
-      value: key,
+      value: mkh.code,
     })
 
-    messages[key] = { el, mkh: mkh.messages, mod }
+    messages[mkh.code] = { el, mkh: mkh.messages, mod }
   })
 
   i18n = createI18n({

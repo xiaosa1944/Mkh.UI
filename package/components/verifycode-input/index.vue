@@ -39,7 +39,7 @@ export default {
     },
   },
   emits: ['update:modelValue', 'update:id'],
-  setup(props, ctx) {
+  setup(props, { emit }) {
     const { getVerifyCode } = MkhUI.config.actions
     const verifyCodeUrl = ref()
 
@@ -47,14 +47,14 @@ export default {
     const refreshVerifyCode = () => {
       getVerifyCode().then(data => {
         verifyCodeUrl.value = data.base64String
-        ctx.emit('update:id', data.id)
-        ctx.emit('update:modelValue', '')
+        emit('update:id', data.id)
+        emit('update:modelValue', '')
       })
     }
     refreshVerifyCode()
 
     const handleInput = val => {
-      ctx.emit('update:modelValue', val)
+      emit('update:modelValue', val)
     }
 
     return {

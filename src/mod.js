@@ -13,9 +13,6 @@ mod.callback = ({ app }) => {
   app.config.globalProperties.$echarts = echarts
 }
 
-/** 注册模块 */
-MkhUI.useModule(mod)
-
 /** 配置登录组件 */
 MkhUI.config.component.login = 'k'
 /** 设置登录方法 */

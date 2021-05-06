@@ -2,7 +2,7 @@
   <el-dialog
     ref="elDialogRef"
     v-model="visible"
-    :top="top"
+    :top="top_ || top"
     :custom-class="class_"
     :show-close="false"
     :width="width"
@@ -31,16 +31,26 @@
         </template>
       </mu-head>
     </template>
-    <!--内容-->
-    <section class="mu-dialog_body">
-      <mu-scrollbar>
-        <slot />
-      </mu-scrollbar>
-    </section>
-    <!--尾部-->
-    <template v-if="$slots.footer" #footer>
-      <slot name="footer" />
-    </template>
+
+    <div
+      v-loading="loading"
+      class="mu-dialog_content"
+      :element-loading-text="loadingText || $t('mkh.dialog.loadingText')"
+      :element-loading-background="loadingBackground || loadingOptions.background"
+      :element-loading-spinner="loadingSpinner || loadingOptions.spinner"
+    >
+      <!--内容-->
+      <section class="mu-dialog_body">
+        <slot v-if="noScrollbar" />
+        <mu-scrollbar v-else>
+          <slot />
+        </mu-scrollbar>
+      </section>
+      <!--尾部-->
+      <footer v-if="$slots.footer" class="mu-dialog_footer">
+        <slot name="footer"></slot>
+      </footer>
+    </div>
   </el-dialog>
 </template>
 <script>
@@ -48,111 +58,18 @@ import { computed, ref } from 'vue'
 import { useVisible, useFullscreen } from '../../composables'
 import { on, off } from '../../utils/dom'
 import { useStore } from 'vuex'
+import props from './props'
 export default {
   name: 'Dialog',
-  props: {
-    modelValue: Boolean,
-    /** 显示头部 */
-    header: {
-      type: Boolean,
-      default: true,
-    },
-    /** 标题 */
-    title: {
-      type: String,
-      default: '',
-    },
-    /** 图标 */
-    icon: {
-      type: String,
-      default: '',
-    },
-    /**图标颜色 */
-    iconColor: {
-      type: String,
-      default: '',
-    },
-    /** 宽度 */
-    width: {
-      type: String,
-      default: '50%',
-    },
-    /** 高度 */
-    height: {
-      type: String,
-      default: '',
-    },
-    /** 距离顶部的高度 */
-    top: {
-      type: String,
-      default: '50px',
-    },
-    /** 尺寸 */
-    size: {
-      type: String,
-      default: '',
-    },
-    /** 自定义类名 */
-    customClass: {
-      type: String,
-      default: '',
-    },
-    /** 是否需要遮罩层 */
-    modal: {
-      type: Boolean,
-      default: true,
-    },
-    /** 是否可以通过点击 modal 关闭 Dialog */
-    closeOnClickModal: {
-      type: Boolean,
-      default: true,
-    },
-    /** 显示关闭按钮 */
-    showClose: {
-      type: Boolean,
-      default: true,
-    },
-    /** 显示全屏按钮 */
-    showFullscreen: {
-      type: Boolean,
-      default: true,
-    },
-    /** 关闭前的回调，会暂停 Dialog 的关闭 */
-    beforeClose: {
-      type: Function,
-      default: null,
-    },
-    /** 关闭时销毁 Dialog 中的元素 */
-    destroyOnClose: Boolean,
-    /** 是否在 Dialog 出现时将 body 滚动锁定 */
-    lockScroll: {
-      type: Boolean,
-      default: true,
-    },
-    /** Dialog 自身是否插入至 body 元素上。嵌套的 Dialog 必须指定该属性并赋值为 true */
-    appendToBody: Boolean,
-    /** 不包含内边距 */
-    noPadding: Boolean,
-    /** 可拖拽的 */
-    draggable: {
-      type: Boolean,
-      default: false,
-    },
-    /** 是否可拖出页面 */
-    dragOutPage: {
-      type: Boolean,
-      default: false,
-    },
-    /** 拖拽出页面后保留的最小宽度，单位px */
-    dragMinWidth: {
-      type: Number,
-      default: 100,
-    },
-  },
+  props,
   emits: ['update:modelValue', 'open', 'opened', 'close', 'closed'],
   setup(props, ctx) {
     const store = useStore()
     const size_ = computed(() => props.size || store.state.app.account.skin.size)
+    //默认情况下，未手动设置高度时距离顶部的距离
+    const top_ = ref('')
+    //加载动画配置
+    const loadingOptions = MkhUI.config.component.loading
 
     //全屏操作
     const { isFullscreen, openFullscreen, closeFullscreen, toggleFullscreen } = useFullscreen(ctx.emit)
@@ -161,11 +78,11 @@ export default {
     const class_ = computed(() => {
       const { customClass, noPadding, draggable } = props
       let classList = ['mu-dialog', `mu-dialog-${new Date().getTime()}`]
-      if (size_.value) classList.push(size_)
-      if (customClass) classList.push(props.customClass)
+      if (size_.value) classList.push(size_.value)
       if (noPadding) classList.push('no-padding')
-      if (isFullscreen.value) classList.push('is-fullscreen')
       if (draggable) classList.push('draggable')
+      if (isFullscreen.value) classList.push('is-fullscreen')
+      if (customClass) classList.push(props.customClass)
 
       return classList.join(' ')
     })
@@ -187,18 +104,45 @@ export default {
 
     const elDialogRef = ref(null)
     let dialogEl = null
-    let dialogHeaderEl = null
+    let headerEl = null
+    let footerEl = null
     let dragDownState = null
+    let headerHeight = 0
+    let footerHeight = 0
 
     //重置窗口大小
     const resize = () => {
-      //如果未设置高度，动态计算对话框高度
-      const height = props.height || document.body.clientHeight - parseInt(props.top.replace('px', '')) * 2 + 'px'
-      dialogEl.style.height = height
+      //如果未设置高度，动态计算对话框高度el-scrollbar__view
+      if (props.height) {
+        dialogEl.style.height = props.height
+      } else {
+        let height = 0
+        if (props.noScrollbar) {
+          console.log(dialogEl.querySelector('.el-dialog__body'))
+        } else {
+          const viewHeight = dialogEl.querySelector('.el-scrollbar__view').offsetHeight
+          height = viewHeight + headerHeight + footerHeight
+        }
+
+        //默认高度不能超出body
+        if (height > document.body.clientHeight) {
+          height = document.body.clientHeight - 100
+          top_.value = '50px'
+        }
+        dialogEl.style.height = height + 'px'
+      }
     }
 
     const handleOpen = () => {
+      ctx.emit('open')
+    }
+
+    const handleOpened = () => {
       dialogEl = elDialogRef.value.dialogRef
+      headerEl = dialogEl.querySelector('.el-dialog__header')
+      footerEl = dialogEl.querySelector('.mu-dialog_footer')
+      headerHeight = headerEl.offsetHeight
+      footerHeight = footerEl.offsetHeight
       const { draggable, height } = props
 
       //开启拖拽功能，先计算初始坐标再计算大小
@@ -207,8 +151,7 @@ export default {
         dialogEl.style.left = (document.body.offsetWidth - widthNumber.value) / 2 + 'px'
         dialogEl.style.top = props.top
 
-        dialogHeaderEl = dialogEl.querySelector('.el-dialog__header')
-        on(dialogHeaderEl, 'mousedown', handleDragDown)
+        on(headerEl, 'mousedown', handleDragDown)
       }
 
       resize()
@@ -217,11 +160,6 @@ export default {
       if (!height) {
         on(window, 'resize', resize)
       }
-
-      ctx.emit('open')
-    }
-
-    const handleOpened = () => {
       ctx.emit('opened')
     }
 
@@ -258,7 +196,7 @@ export default {
       if (dragOutPage) {
         leftMax = document.body.offsetWidth - dragMinWidth
         leftMin = -dialogEl.offsetWidth + dragMinWidth
-        topMax = document.body.offsetHeight - dialogHeaderEl.offsetHeight
+        topMax = document.body.offsetHeight - headerHeight
       }
 
       dialogEl.style.left = Math.max(leftMin, Math.min(left, leftMax)) + 'px'
@@ -274,7 +212,9 @@ export default {
 
     return {
       size_,
+      top_,
       class_,
+      loadingOptions,
       visible,
       open,
       close,

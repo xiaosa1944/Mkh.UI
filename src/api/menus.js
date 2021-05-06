@@ -97,6 +97,14 @@ export default [
         routeName: 'doc_advanced_dialog',
       },
       {
+        name: '表单(Form)',
+        type: 1,
+        icon: 'edit',
+        level: 2,
+        show: true,
+        routeName: 'doc_advanced_form',
+      },
+      {
         name: '列表页(List)',
         type: 1,
         icon: 'list',

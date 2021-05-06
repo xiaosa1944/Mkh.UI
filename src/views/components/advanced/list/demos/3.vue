@@ -18,14 +18,18 @@
           </el-select>
         </el-form-item>
       </template>
+      <template #toolbar>
+        <mu-button icon="plus" @click="handleCustomButton" />
+      </template>
     </mu-list>
   </div>
 </template>
 <script>
-import { reactive, ref } from 'vue'
+import { getCurrentInstance, reactive, ref } from 'vue'
 import { query } from './api'
 export default {
   setup() {
+    const { $alert } = getCurrentInstance().proxy
     const model = reactive({ name: '', author: '', dynasty: '' })
     const cols = ref([
       { prop: 'id', label: '编号', width: '55', show: false },
@@ -38,10 +42,17 @@ export default {
       { prop: 'type', label: '类型' },
     ])
 
+    const handleCustomButton = () => {
+      $alert('您点击了自定义按钮~', '提示', {
+        confirmButtonText: '确定',
+      })
+    }
+
     return {
       model,
       cols,
       query,
+      handleCustomButton,
     }
   },
 }

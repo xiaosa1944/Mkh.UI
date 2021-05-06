@@ -11,7 +11,7 @@
     :autofocus="autofocus"
     :native-type="nativeType"
     :icon="icon"
-    :text="text"
+    :text="text || $t('mkh.delete.text')"
     :code="code"
     @click="handleClick"
   >
@@ -59,7 +59,7 @@ export default {
     /** 文本 */
     text: {
       type: String,
-      default: '删除',
+      default: '',
     },
     /** 按钮编码，用于按钮权限控制 */
     code: {
@@ -74,7 +74,7 @@ export default {
     /** 二次确认的消息 */
     msg: {
       type: String,
-      default: '您确认要删除该数据吗?',
+      default: '',
     },
     /** 删除方法，需返回Promise */
     action: {
@@ -85,25 +85,25 @@ export default {
   emits: ['success', 'error'],
   setup(props, ctx) {
     const cit = getCurrentInstance().proxy
-    const { $confirm, $message } = cit
+    const { $confirm, $message, $t } = cit
     const store = useStore()
     const size_ = computed(() => props.size || store.state.app.account.skin.size)
 
     const loading = useLoading(cit)
 
     const handleClick = () => {
-      $confirm(props.msg, '删除提示', {
+      $confirm(props.msg || $t('mkh.delete.msg'), $t('mkh.delete.title'), {
         type: 'warning',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: $t('mkh.delete.ok'),
+        cancelButtonText: $t('mkh.delete.cancel'),
       })
         .then(() => {
-          loading.open('正在删除数据，请稍后...')
+          loading.open($t('mkh.delete.loading'))
           props
             .action(props.data)
             .then(() => {
               $message.success({
-                message: '删除成功~',
+                message: $t('mkh.delete.success'),
                 type: 'success',
               })
               ctx.emit('success')
