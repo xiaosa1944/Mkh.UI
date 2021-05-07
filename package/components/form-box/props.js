@@ -1,7 +1,6 @@
 import { loading } from '../../helpers/props'
 export default {
   ...loading,
-  modelValue: Boolean,
   /** 表单提交方法 */
   action: {
     type: Function,
@@ -42,13 +41,6 @@ export default {
     type: String,
     default: 'reset',
   },
-  /** 尺寸 */
-  size: {
-    type: String,
-    default: '',
-  },
   /** 禁用表单 */
   disabled: Boolean,
-  /** 关闭时重置表单 */
-  resetOnClosed: Boolean,
 }

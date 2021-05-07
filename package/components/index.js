@@ -12,6 +12,7 @@ import FlexRight from './flex-right/index.vue'
 import FlexTop from './flex-top/index.vue'
 import FlexBottom from './flex-bottom/index.vue'
 import Form from './form/index.vue'
+import FormBox from './form-box/index.vue'
 import FormDialog from './form-dialog/index.vue'
 import Head from './head/index.vue'
 import Icon from './icon/index.vue'
@@ -42,6 +43,7 @@ const components = [
   FlexTop,
   FlexBottom,
   Form,
+  FormBox,
   FormDialog,
   Head,
   Icon,

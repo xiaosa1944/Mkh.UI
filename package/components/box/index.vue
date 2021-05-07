@@ -14,9 +14,9 @@
         <!--工具栏插槽-->
         <slot name="toolbar" />
         <!--折叠按钮，页模式下折叠功能无效-->
-        <mu-button v-if="!showCollapse" :icon="isCollapse ? 'chevron-down' : 'chevron-up'" @click="toggleCollapse" />
+        <mu-button v-if="showCollapse" :icon="isCollapse ? 'chevron-down' : 'chevron-up'" @click="toggleCollapse" />
         <!--全屏按钮-->
-        <mu-button v-if="!showFullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
+        <mu-button v-if="showFullscreen" :icon="isFullscreen ? 'full-screen-exit' : 'full-screen'" @click="toggleFullscreen" />
       </template>
     </mu-head>
     <el-collapse-transition>

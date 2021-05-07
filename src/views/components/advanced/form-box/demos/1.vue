@@ -1,6 +1,5 @@
 <template>
-  <mu-button type="primary" text="打开对话框表单" @click="visible = true"></mu-button>
-  <mu-form-dialog v-model="visible" title="添加活动" icon="plus" :action="action" :model="model" :rules="rules">
+  <mu-form-box title="添加活动" icon="plus" :action="action" :model="model" :rules="rules" :disabled="disabled">
     <el-form-item label="活动名称" prop="name">
       <el-input v-model="model.name"></el-input>
     </el-form-item>
@@ -19,13 +18,16 @@
         <el-time-picker v-model="model.date2" placeholder="选择时间" style="width: 100%"></el-time-picker>
       </el-col>
     </el-form-item>
-  </mu-form-dialog>
+    <template #footer>
+      <mu-button type="primary" :text="disabled ? '启用表单' : '禁用表单'" @click="disabled = !disabled"></mu-button>
+    </template>
+  </mu-form-box>
 </template>
 <script>
 import { reactive, ref } from 'vue'
 export default {
   setup() {
-    const visible = ref(false)
+    const disabled = ref(false)
     const model = reactive({
       name: '',
       region: '',
@@ -42,7 +44,7 @@ export default {
       })
     }
 
-    return { visible, model, rules, action }
+    return { disabled, model, rules, action }
   },
 }
 </script>

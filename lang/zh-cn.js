@@ -41,8 +41,6 @@ export default {
     },
     form: {
       loadingText: '正在保存，请稍后...',
-    },
-    formDialog: {
       btnOkText: '保存',
       btnResetText: '重置',
       successMsg: '保存成功',

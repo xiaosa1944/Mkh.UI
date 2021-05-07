@@ -1,5 +1,9 @@
 import { loading } from '../../helpers/props'
 export default {
+  ...loading,
+  /** 不显示加载动画 */
+  noLoading: Boolean,
+  /** 表单提交方法 */
   action: {
     type: Function,
     default: null,
@@ -14,7 +18,4 @@ export default {
     type: Function,
     default: null,
   },
-  /** 不显示加载动画 */
-  noLoading: Boolean,
-  ...loading,
 }

@@ -1,40 +1,38 @@
 const fs = require('fs')
 const path = require('path')
+import fg from 'fast-glob'
 import { normalizePath } from 'vite'
 
 export default function (modules) {
   const prefix = '@mkh-module-'
 
-  //加载路由页面信息
-  const loadPages = (dir, pages) => {
-    if (fs.existsSync(dir)) {
-      const files = fs.readdirSync(dir)
+  //**匹配需要搜索的文件 */
+  async function getFiles(patterns) {
+    const files = await fg(patterns, {
+      dot: true,
+      caseSensitiveMatch: false,
+    })
+    files.sort()
+    return files
+  }
 
-      files.forEach(file => {
-        const subDir = path.join(dir, file)
-        var stat = fs.statSync(subDir)
-        if (stat.isDirectory()) {
-          loadPages(subDir, pages)
-        } else if (file === 'page.js') {
-          pages.push(normalizePath(subDir))
-        }
-      })
-    }
+  //加载路由页面信息
+  const loadPages = async (dir, pages) => {
+    let files = await getFiles([dir + '/**/page.js'])
+    files.forEach(file => {
+      pages.push(normalizePath(file))
+    })
   }
 
   //加载模块全局组件信息
-  const loadComponents = (dir, components) => {
+  const loadComponents = async (dir, components) => {
     if (fs.existsSync(dir)) {
-      const files = fs.readdirSync(dir)
+      let files = await getFiles([dir + '/**/index.vue'])
       files.forEach(file => {
-        const subDir = path.join(dir, file)
-        var stat = fs.statSync(subDir)
-        if (stat.isDirectory()) {
-          var componentPath = path.resolve(subDir, 'index.vue')
-          if (fs.existsSync(componentPath)) {
-            components.push({ name: file, path: normalizePath(componentPath) })
-          }
-        }
+        components.push({
+          name: path.basename(path.dirname(file)),
+          path: normalizePath(file),
+        })
       })
     }
   }
@@ -55,7 +53,7 @@ export default function (modules) {
 
       return null
     },
-    load(id) {
+    async load(id) {
       if (id.startsWith(prefix)) {
         let src = '' //导入代码
         let exportCode = '' //导出代码
@@ -87,7 +85,8 @@ export default function (modules) {
         /** 加载模块路由页面 */
         const pages = []
         const pagesDir = normalizePath(path.resolve(dir, 'views'))
-        loadPages(pagesDir, pages)
+        await loadPages(pagesDir, pages)
+
         pages.forEach((p, i) => {
           const name = `page_${i}`
           src += `import ${name} from '${p}'\r\n`
@@ -96,7 +95,7 @@ export default function (modules) {
         /** 加载模块全局组件 */
         const components = []
         const componentsDir = normalizePath(path.resolve(dir, 'components'))
-        loadComponents(componentsDir, components)
+        await loadComponents(componentsDir, components)
         components.forEach((c, i) => {
           const name = `component_${i}`
           src += `import ${name} from '${c.path}'\r\n`

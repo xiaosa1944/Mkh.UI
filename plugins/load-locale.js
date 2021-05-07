@@ -35,7 +35,6 @@ export default function (modules) {
             mods.push(m)
           }
         }
-
         code += `export default { el:el.el, mkh, mod: {${mods.join(',')}}}`
 
         return code

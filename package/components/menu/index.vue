@@ -1,6 +1,6 @@
 <template>
   <div :class="['mu-menu', isCollapse ? 'is-collapse' : '']">
-    <mu-scrollbar>
+    <mu-scrollbar horizontal>
       <el-menu :default-active="defaultActive" class="mu-menu_wrapper" :collapse="isCollapse"> <menu-item :menus="menus" /> </el-menu>
     </mu-scrollbar>
   </div>

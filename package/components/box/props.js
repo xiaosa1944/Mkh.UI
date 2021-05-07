@@ -1,5 +1,6 @@
 import { loading } from '../../helpers/props'
 export default {
+  ...loading,
   /** 显示头部 */
   header: {
     type: Boolean,
@@ -58,6 +59,8 @@ export default {
   /** 显示折叠按钮 */
   showCollapse: Boolean,
   /** 显示全屏按钮 */
-  showFullscreen: Boolean,
-  ...loading,
+  showFullscreen: {
+    type: Boolean,
+    default: true,
+  },
 }

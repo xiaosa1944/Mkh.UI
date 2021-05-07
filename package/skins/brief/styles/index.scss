@@ -1,7 +1,7 @@
 @import '../../../styles/var';
 $skin-brief-header-height: 55px;
 $skin-brief-logo-width: 35px;
-$skin-brief-toolbar-icon-font-size: 25px;
+$skin-brief-toolbar-icon-font-size: 20px;
 
 $skin-brief-breadcrumb-height: 50px;
 
@@ -65,7 +65,7 @@ $skin-brief-breadcrumb-height: 50px;
 
       #{$prefix}-toolbar_item {
         display: inline-block;
-        margin: 0 10px;
+        margin: 0 7px;
         height: 100%;
 
         #{$prefix}-icon {

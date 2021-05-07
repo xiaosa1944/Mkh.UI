@@ -1,6 +1,7 @@
 <template>
   <div style="padding: 50px">
-    <mu-form ref="formRef" :action="action" :model="model" :rules="rules" @success="handleSuccess">
+    <mu-button type="danger" :text="disabled ? '启用表单' : '禁用表单'" @click="disabled = !disabled" />
+    <mu-form ref="formRef" :action="action" :model="model" :rules="rules" :disabled="disabled" @success="handleSuccess">
       <el-form-item label="活动名称" prop="name">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
@@ -20,14 +21,14 @@
         </el-col>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="() => formRef.submit()">立即创建</el-button>
-        <el-button>取消</el-button>
+        <mu-button type="primary" text="创建" @click="() => formRef.submit()" />
+        <mu-button type="info" text="重置" @click="() => formRef.reset()" />
       </el-form-item>
     </mu-form>
   </div>
 </template>
 <script>
-import { getCurrentInstance, reactive, readonly, ref } from 'vue'
+import { getCurrentInstance, reactive, ref } from 'vue'
 export default {
   setup() {
     const { $message } = getCurrentInstance().proxy
@@ -41,6 +42,7 @@ export default {
     const rules = {
       name: [{ required: true, message: '请输入名称' }],
     }
+    const disabled = ref(false)
 
     const action = () => {
       return new Promise(resolve => {
@@ -52,7 +54,7 @@ export default {
       $message({ type: 'success', message: '恭喜你，保存成功' })
     }
 
-    return { formRef, model, rules, action, handleSuccess }
+    return { formRef, model, rules, disabled, action, handleSuccess }
   },
 }
 </script>
