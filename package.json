@@ -1,7 +1,7 @@
 {
   "id": 0,
   "name": "@mkh/ui",
-  "version": "0.0.17",
+  "version": "0.0.1",
   "description": "17MKH前端框架",
   "author": "OLDLI",
   "main": "lib/index.es.js",
@@ -43,9 +43,6 @@
     "rollup-plugin-multi-input": "^1.2.0",
     "sass": "^1.32.8",
     "vite": "^2.0.5"
-  },
-  "publishConfig": {
-    "registry": "http://nexus.17mkh.com/repository/npm-hosted/"
   },
   "files": [
     "entries",
